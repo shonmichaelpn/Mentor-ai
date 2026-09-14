@@ -16,7 +16,7 @@ export default function Sidebar({
   onSelectChapter,
 }: SidebarProps) {
   return (
-    <aside className="w-72 shrink-0 border-r border-zinc-800 bg-zinc-950">
+    <aside className="flex h-screen w-80 shrink-0 flex-col overflow-hidden border-r border-zinc-800 bg-zinc-950">
       {/* Logo */}
       <div className="border-b border-zinc-800 p-6">
         <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export default function Sidebar({
       </div>
 
       {/* Chapter list */}
-      <div className="p-4">
+      <div className="min-h-0 flex-1 overflow-y-auto p-4">
         <div className="mb-4 flex items-center justify-between px-2">
           <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">
             Learning Path

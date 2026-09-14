@@ -5,7 +5,7 @@
     "description": "Learn how JavaScript stores information using variables and understand the different types of values your programs can work with.",
     "sections": [
       {
-        "title": "1. What Are Variables?",
+        "title": "What Are Variables?",
         "content": "A variable is a named container used to store a value in a JavaScript program. Instead of working directly with a value every time, we give it a name and use that name later. Variables are useful when information needs to be stored, reused, displayed, or changed during program execution.",
         "examples": [
           {
@@ -21,7 +21,7 @@
         ]
       },
       {
-        "title": "2. let, const and var",
+        "title": "let, const and var",
         "content": "JavaScript provides three keywords for declaring variables: let, const, and var. In modern JavaScript, let and const are preferred. Use const when a variable should not be reassigned, and let when its value needs to change. var is an older declaration style that you may still encounter in existing JavaScript code.",
         "examples": [
           {
@@ -42,7 +42,7 @@
         ]
       },
       {
-        "title": "3. What Are Data Types?",
+        "title": "What Are Data Types?",
         "content": "A data type describes what kind of value is stored in a variable. JavaScript is dynamically typed, which means a variable does not have to be permanently associated with one data type. Understanding data types is important because different values support different operations.",
         "examples": [
           {
@@ -53,7 +53,7 @@
         ]
       },
       {
-        "title": "4. JavaScript's Main Data Types",
+        "title": "JavaScript's Main Data Types",
         "content": "JavaScript has eight main data types. Seven are primitive types: string, number, bigint, boolean, undefined, null, and symbol. The eighth is object, which is used for more complex data structures. Arrays and functions are also objects in JavaScript, although they are commonly discussed separately because they are so important.",
         "examples": [
           {
@@ -94,7 +94,7 @@
         ]
       },
       {
-        "title": "5. The typeof Operator",
+        "title": "The typeof Operator",
         "content": "The typeof operator lets us check the type of a value at runtime. This can be useful when debugging, validating data, or understanding what a variable currently contains.",
         "examples": [
           {
@@ -110,7 +110,7 @@
         ]
       },
       {
-        "title": "6. Real-World Usage",
+        "title": "Real-World Usage",
         "content": "Choosing appropriate variable declarations and data types makes programs easier to understand and maintain. Different applications naturally use different types of information.",
         "examples": [
           {
@@ -266,6 +266,16 @@
         "typeof",
         "console.log",
         "variable reassignment"
+      ],
+      "evaluationCriteria": [
+        "Use const for playerName because the player's name should not be reassigned.",
+        "Use let for level because the player's level can change.",
+        "Use let for health because the player's health can change.",
+        "Store isOnline as a boolean value.",
+        "Use console.log() to display the player's information.",
+        "Use typeof to inspect the data types of the player information.",
+        "Demonstrate reassignment of the level variable.",
+        "Do not use var."
       ]
     }
   },
@@ -335,6 +345,22 @@
   },
   {
     "id": 10,
+    "title": "Mini Challenge",
+    "conceptText": "Combine the concepts you've learned to build a small JavaScript program using variables, functions, arrays, objects, and control flow.",
+    "codeExample": "const users = [\n  { name: \"Alex\", age: 22 },\n  { name: \"Sam\", age: 17 },\n  { name: \"John\", age: 25 }\n];\n\nconst adults = users.filter(user => user.age >= 18);\n\nconsole.log(adults);",
+    "testInstructions": "Create a function called getAdults that accepts an array of user objects and returns only users whose age is 18 or greater.",
+    "starterCode": "function getAdults(users) {\n  // Return only users aged 18 or older\n}\n\nconst users = [\n  { name: \"Alex\", age: 22 },\n  { name: \"Sam\", age: 17 },\n  { name: \"John\", age: 25 }\n];\n\nconsole.log(getAdults(users));\n"
+  },
+    {
+    "id": 11,
+    "title": "Mini Challenge",
+    "conceptText": "Combine the concepts you've learned to build a small JavaScript program using variables, functions, arrays, objects, and control flow.",
+    "codeExample": "const users = [\n  { name: \"Alex\", age: 22 },\n  { name: \"Sam\", age: 17 },\n  { name: \"John\", age: 25 }\n];\n\nconst adults = users.filter(user => user.age >= 18);\n\nconsole.log(adults);",
+    "testInstructions": "Create a function called getAdults that accepts an array of user objects and returns only users whose age is 18 or greater.",
+    "starterCode": "function getAdults(users) {\n  // Return only users aged 18 or older\n}\n\nconst users = [\n  { name: \"Alex\", age: 22 },\n  { name: \"Sam\", age: 17 },\n  { name: \"John\", age: 25 }\n];\n\nconsole.log(getAdults(users));\n"
+  },
+    {
+    "id": 12,
     "title": "Mini Challenge",
     "conceptText": "Combine the concepts you've learned to build a small JavaScript program using variables, functions, arrays, objects, and control flow.",
     "codeExample": "const users = [\n  { name: \"Alex\", age: 22 },\n  { name: \"Sam\", age: 17 },\n  { name: \"John\", age: 25 }\n];\n\nconst adults = users.filter(user => user.age >= 18);\n\nconsole.log(adults);",

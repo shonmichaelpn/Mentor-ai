@@ -79,7 +79,7 @@ export default function LessonContent({
         {chapter.sections.map((section, sectionIndex) => (
           <article key={section.title}>
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-800 text-sm font-semibold text-zinc-300">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-800 text-lg font-semibold text-white">
                 {sectionIndex + 1}
               </span>
 

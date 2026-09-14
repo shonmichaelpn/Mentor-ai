@@ -32,4 +32,5 @@ export interface CodingChallenge {
   instructions: string[];
   starterCode: string;
   expectedConcepts: string[];
+  evaluationCriteria: string[];
 }

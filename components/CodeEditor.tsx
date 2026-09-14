@@ -13,7 +13,7 @@ export default function CodeEditor({
 }: CodeEditorProps) {
   return (
     <Editor
-      height="100%"
+      height="500px"
       defaultLanguage="javascript"
       theme="vs-dark"
       value={value}
