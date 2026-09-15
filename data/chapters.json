@@ -27,19 +27,23 @@
           {
             "title": "const",
             "code": "const username = \"Alex\";\nconsole.log(username);",
-            "explanation": "Use const when the variable should not be reassigned."
+            "explanation": "Use const when the variable should not be reassigned. const is block-scoped, meaning it is only accessible inside the block where it is declared."
           },
           {
             "title": "let",
             "code": "let score = 0;\nscore = 100;\nconsole.log(score);",
-            "explanation": "Use let when the value needs to be reassigned."
+            "explanation": "Use let when the value needs to be reassigned. let is also block-scoped, meaning it is only accessible inside the block where it is declared."
           },
           {
             "title": "var",
             "code": "var level = 1;\nlevel = 2;\nconsole.log(level);",
-            "explanation": "var allows reassignment, but it has older scoping behavior. Modern JavaScript generally prefers let and const."
+            "explanation": "var allows reassignment and is function-scoped rather than block-scoped. It has older scoping behavior, so modern JavaScript generally prefers let and const."
           }
         ]
+      },
+      {
+        "title": "Understanding Scope",
+        "content": "Scope determines where a variable can be accessed in your code.\n\n### What is a block?\n\nA block is a section of code surrounded by curly braces `{ }`. Blocks are commonly created by if statements, loops, and other control structures.\n\nFor example:\n\n```javascript\n{\n    let score = 100;\n    const player = \"Alex\";\n\n    console.log(score);   // Works\n    console.log(player);  // Works\n}\n\nconsole.log(score);   // Error\nconsole.log(player);  // Error\n```\n\nThe variables `score` and `player` were created inside the block, so they can only be accessed from within that block. This is called **block scope**.\n\nBoth `let` and `const` are block-scoped.\n\n### What is a function?\n\nA function is a reusable section of code. Variables declared inside a function can normally be accessed only from within that function.\n\n```javascript\nfunction showPlayer() {\n    var player = \"Alex\";\n\n    console.log(player); // Works\n}\n\nshowPlayer();\n\nconsole.log(player); // Error\n```\n\nThe variable `player` was created inside the function, so it is available inside that function but not outside it. This is called **function scope**.\n\n### How does var behave differently?\n\n`var` is function-scoped rather than block-scoped. This means that creating a `var` variable inside a block does not limit it to that block.\n\n```javascript\nfunction game() {\n    if (true) {\n        var level = 10;\n    }\n\n    console.log(level); // Works\n}\n\ngame();\n```\n\nHere, `level` was created inside the `if` block, but it can still be accessed later inside the surrounding function because `var` follows function-scope rules.\n\nIf we used `let` instead:\n\n```javascript\nfunction game() {\n    if (true) {\n        let level = 10;\n    }\n\n    console.log(level); // Error\n}\n```\n\n`level` cannot be accessed outside the `if` block because `let` is block-scoped.\n\n### Quick comparison\n\n| Declaration | Can be reassigned? | Scope |\n|---|---|---|\n| `const` | No | Block scope |\n| `let` | Yes | Block scope |\n| `var` | Yes | Function scope |\n\nModern JavaScript generally prefers `const` and `let` because their block-scoping behavior makes code easier to understand and reduces accidental access to variables from places where they should not be used."
       },
       {
         "title": "What Are Data Types?",
@@ -247,13 +251,12 @@
       "title": "Build a Player Profile",
       "scenario": "You are building the profile system for a multiplayer game. The game needs to store basic information about a player before displaying it in the game interface.",
       "instructions": [
-        "Create a const variable called playerName and store a player's name as a string.",
-        "Create a let variable called level and give it a numeric starting value.",
-        "Create a let variable called health and give it a numeric value such as 100.",
-        "Create a const variable called isOnline and store a boolean value.",
+        "Create variables to store the player's name, level, health, and online status.",
+        "Choose appropriate variable declarations for each value based on whether the value should be reassigned.",
+        "Store the player's name as a string, level and health as numbers, and online status as a boolean.",
         "Use console.log() to display each value.",
         "Use typeof to display the data type of each variable.",
-        "Change the player's level once using let to demonstrate reassignment.",
+        "Simulate the player leveling up by changing the level after it is created.",
         "Do not use var for this challenge."
       ],
       "starterCode": "// Create the player profile here\n\n\n// Display the player's information\n",

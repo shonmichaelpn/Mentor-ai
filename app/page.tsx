@@ -6,8 +6,11 @@ import Sidebar from "@/components/Sidebar";
 import LessonContent from "@/components/LessonContent";
 import CodeEditor from "@/components/CodeEditor";
 import Terminal from "@/components/Terminal";
+import EvaluationPanel from "@/components/EvaluationPanel";
 import { Chapter } from "@/types/chapter";
-import { runJavaScript } from "@/lib/codeRunner"; 
+import { runJavaScript } from "@/lib/codeRunner";
+import MCQTest from "@/components/MCQTest";
+ 
 
 const chapterData = chapters as Chapter[];
 
@@ -20,9 +23,9 @@ export default function Home() {
   const [terminalOutput, setTerminalOutput] = useState("");
   const [terminalError, setTerminalError] = useState<string | null>(null);
   const [isRunning, setIsRunning] = useState(false);
-  const [terminalExplanation, setTerminalExplanation] = useState<string | null>(
-  null
-);
+  const [terminalExplanation, setTerminalExplanation] = useState<string | null>(null);
+  const [evaluation, setEvaluation] = useState<any>(null);
+  const [isEvaluating, setIsEvaluating] = useState(false);
 
   const testRef = useRef<HTMLDivElement>(null);
 
@@ -81,10 +84,50 @@ export default function Home() {
     setTerminalExplanation(null);
   };
 
-  const handleSubmit = () => {
-    setTerminalOutput(
-      "Challenge evaluation will be connected shortly."
-    )
+  const handleSubmit = async () => {
+    if (isEvaluating) return;
+
+    setIsEvaluating(true);
+    setEvaluation(null);
+
+    try {
+      const result = await runJavaScript(userCode);
+
+      const response = await fetch("/api/evaluate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          code: userCode,
+          scenario: activeChapter.codingChallenge.scenario,
+          instructions: activeChapter.codingChallenge.instructions,
+          expectedConcepts: activeChapter.codingChallenge.expectedConcepts,
+          evaluationCriteria:
+            activeChapter.codingChallenge.evaluationCriteria,
+          output: result.output.join("\n"),
+          error: result.error,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Evaluation failed.");
+      }
+
+      setEvaluation(data.evaluation);
+    } catch (error) {
+      console.error("Submit error:", error);
+
+      setTerminalError(
+        error instanceof Error
+          ? error.message
+          : "Failed to evaluate the challenge."
+      );
+    } finally {
+      setIsEvaluating(false);
+    }
   };
 
   const handleExplainError = () => {
@@ -139,47 +182,73 @@ export default function Home() {
           onSkipToTest={handleSkipToTest}
         />
 
-        {/* Test Placeholder */}
+        {/* Test */}
         <section
           ref={testRef}
-          className="mx-auto max-w-4xl px-8 pb-16"
+          className="border-t border-zinc-800 px-8 py-10"
         >
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
-            <div className="mb-2 text-sm font-medium text-blue-400">
-              Knowledge Test
-            </div>
-
-            <h2 className="text-2xl font-semibold text-white">
-              Test your understanding
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              The 10-question MCQ system will be built next.
-              It will include optional timed mode with a maximum
-              of 10 seconds per question.
-            </p>
+          <div className="mx-auto max-w-4xl">
+            <MCQTest
+              key={activeChapter.id}
+              questions={activeChapter.mcqTest}
+              onPassed={() => {
+                console.log("MCQ test passed");
+              }}
+            />
           </div>
         </section>
 
         {/* Coding Environment */}
-        <section className="border-t border-zinc-800 bg-zinc-950 px-8 py-8">
+        <section className="border-t border-zinc-800 bg-zinc-950 px-8 py-10">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-5">
+
+            {/* Challenge Header */}
+            <div className="mb-8">
               <div className="mb-2 text-sm font-medium text-emerald-400">
                 Coding Challenge
               </div>
 
-              <h2 className="text-2xl font-semibold text-white">
+              <h2 className="text-3xl font-semibold text-white">
                 {activeChapter.codingChallenge.title}
               </h2>
 
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-400">
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-zinc-400">
                 {activeChapter.codingChallenge.scenario}
               </p>
             </div>
 
+            {/* Challenge Instructions */}
+            <div className="mb-8 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+              <h3 className="text-sm font-semibold text-zinc-200">
+                Your Task
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-zinc-400">
+                Complete the challenge below using what you learned in this chapter.
+                Make sure your code satisfies all of the following requirements.
+              </p>
+
+              <ul className="mt-5 space-y-3">
+                {activeChapter.codingChallenge.instructions.map(
+                  (instruction, index) => (
+                    <li
+                      key={instruction}
+                      className="flex gap-3 text-sm leading-6 text-zinc-300"
+                    >
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-xs font-medium text-zinc-400">
+                        {index + 1}
+                      </span>
+
+                      <span>{instruction}</span>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            {/* Editor + Terminal */}
+
             <div className="grid items-start gap-6 lg:grid-cols-[1fr_380px]">
-              {/* Editor */}
               <div className="overflow-hidden rounded-xl border border-zinc-800">
                 <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-4 py-3">
                   <span className="text-sm font-medium text-zinc-300">
@@ -204,9 +273,10 @@ export default function Home() {
 
                     <button
                       onClick={handleSubmit}
+                      disabled={isEvaluating}
                       className="rounded-md bg-emerald-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-400"
                     >
-                      Submit
+                      {isEvaluating ? "Evaluating..." : "Submit"}
                     </button>
                   </div>
                 </div>
@@ -226,6 +296,10 @@ export default function Home() {
                 onExplainError={handleExplainError}
               />
             </div>
+            <EvaluationPanel
+              evaluation={evaluation}
+              isEvaluating={isEvaluating}
+            />
           </div>
         </section>
       </main>

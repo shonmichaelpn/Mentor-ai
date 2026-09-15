@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 interface LessonContentProps {
   chapter: {
     id: number;
@@ -12,12 +14,6 @@ interface LessonContentProps {
         explanation: string;
       }[];
     }[];
-    mcqTest: unknown[];
-    codingChallenge: {
-      title: string;
-      scenario: string;
-      instructions: string[];
-    };
   };
   onSkipToTest: () => void;
 }
@@ -88,9 +84,65 @@ export default function LessonContent({
               </h2>
             </div>
 
-            <p className="mb-6 whitespace-pre-line text-base leading-8 text-zinc-400">
-              {section.content}
-            </p>
+            <div className="mb-6 text-base leading-8 text-zinc-400">
+              <ReactMarkdown
+                components={{
+                  h3: ({ children }) => (
+                    <h3 className="mt-8 mb-3 text-xl font-semibold text-white">
+                      {children}
+                    </h3>
+                  ),
+
+                  p: ({ children }) => (
+                    <p className="mb-4 leading-8 text-zinc-300">
+                      {children}
+                    </p>
+                  ),
+
+                  code: ({ className, children }) => {
+                    const isBlock = className?.includes("language-");
+
+                    if (isBlock) {
+                      return (
+                        <pre className="my-5 overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-5">
+                          <code className="text-sm leading-7 text-zinc-200">
+                            {children}
+                          </code>
+                        </pre>
+                      );
+                    }
+
+                    return (
+                      <code className="rounded bg-zinc-800 px-1.5 py-0.5 text-sm text-blue-300">
+                        {children}
+                      </code>
+                    );
+                  },
+
+                  table: ({ children }) => (
+                    <div className="my-6 overflow-x-auto rounded-lg border border-zinc-800">
+                      <table className="w-full text-left text-sm">
+                        {children}
+                      </table>
+                    </div>
+                  ),
+
+                  th: ({ children }) => (
+                    <th className="border-b border-zinc-800 bg-zinc-900 px-4 py-3 font-semibold text-white">
+                      {children}
+                    </th>
+                  ),
+
+                  td: ({ children }) => (
+                    <td className="border-b border-zinc-800 px-4 py-3 text-zinc-300">
+                      {children}
+                    </td>
+                  ),
+                }}
+              >
+                {section.content}
+              </ReactMarkdown>
+            </div>
 
             {/* Examples */}
             {section.examples && section.examples.length > 0 && (
@@ -124,68 +176,6 @@ export default function LessonContent({
             )}
           </article>
         ))}
-      </div>
-
-      {/* Continue to Test */}
-      <div className="mt-14 border-t border-zinc-800 pt-8">
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-          <div className="mb-4">
-            <div className="mb-2 text-sm font-medium text-blue-400">
-              Ready to check your understanding?
-            </div>
-
-            <h2 className="text-xl font-semibold text-white">
-              Test your knowledge
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              You&apos;ll answer 10 questions covering concepts, syntax,
-              output prediction, debugging, and real-world JavaScript usage.
-            </p>
-          </div>
-
-          <button
-            onClick={onSkipToTest}
-            className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
-          >
-            Continue to Test →
-          </button>
-        </div>
-      </div>
-
-      {/* Coding Challenge Preview */}
-      <div className="mt-8 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6">
-        <div className="mb-2 text-sm font-medium text-emerald-400">
-          Coding Challenge
-        </div>
-
-        <h2 className="text-xl font-semibold text-white">
-          {chapter.codingChallenge.title}
-        </h2>
-
-        <p className="mt-3 text-sm leading-7 text-zinc-400">
-          {chapter.codingChallenge.scenario}
-        </p>
-
-        <div className="mt-5">
-          <div className="mb-3 text-sm font-medium text-zinc-300">
-            You&apos;ll practice:
-          </div>
-
-          <ul className="space-y-2">
-            {chapter.codingChallenge.instructions
-              .slice(0, 3)
-              .map((instruction) => (
-                <li
-                  key={instruction}
-                  className="flex gap-2 text-sm text-zinc-400"
-                >
-                  <span className="text-emerald-400">✓</span>
-                  <span>{instruction}</span>
-                </li>
-              ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
