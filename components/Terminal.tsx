@@ -3,6 +3,7 @@ interface TerminalProps {
   error: string | null;
   explanation?: string | null;
   isRunning?: boolean;
+  isExplainingError?: boolean;
   onExplainError?: () => void;
 }
 
@@ -12,7 +13,8 @@ export default function Terminal({
   output,
   error,
   explanation,
-  isRunning = false,
+  isRunning,
+  isExplainingError,
   onExplainError,
 }: TerminalProps) {
   return (
@@ -57,9 +59,10 @@ export default function Terminal({
                 {!explanation && (
                   <button
                     onClick={onExplainError}
-                    className="mt-5 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-300 transition hover:border-zinc-600 hover:bg-zinc-800 hover:text-white"
+                    disabled={isExplainingError}
+                    className="rounded-md border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Explain Error
+                    {isExplainingError ? "Thinking..." : "Explain Error"}
                   </button>
                 )}
 

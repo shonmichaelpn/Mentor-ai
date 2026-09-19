@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface LessonContentProps {
   chapter: {
@@ -86,6 +87,7 @@ export default function LessonContent({
 
             <div className="mb-6 text-base leading-8 text-zinc-400">
               <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   h3: ({ children }) => (
                     <h3 className="mt-8 mb-3 text-xl font-semibold text-white">
@@ -177,6 +179,14 @@ export default function LessonContent({
           </article>
         ))}
       </div>
+
+      <button
+        type="button"
+        onClick={onSkipToTest}
+        className="mt-12 rounded-lg border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-900"
+      >
+        Skip to knowledge test
+      </button>
     </section>
   );
 }

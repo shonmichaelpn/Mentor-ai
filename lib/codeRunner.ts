@@ -10,7 +10,7 @@ export function runJavaScript(
 ): Promise<CodeRunResult> {
   return new Promise((resolve) => {
     const workerCode = `
-      self.onmessage = function(event) {
+      self.onmessage = async function(event) {
         const code = event.data;
 
         const output = [];
@@ -49,7 +49,7 @@ export function runJavaScript(
 
         try {
           const execute = new Function(code);
-          execute();
+          await execute();
 
           self.postMessage({
             output,

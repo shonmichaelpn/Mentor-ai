@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface Question {
   question: string;
@@ -12,11 +12,13 @@ interface Question {
 interface MCQTestProps {
   questions: Question[];
   onPassed?: () => void;
+  onContinue?: () => void;
 }
 
 export default function MCQTest({
   questions,
   onPassed,
+  onContinue,
 }: MCQTestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -30,32 +32,6 @@ export default function MCQTest({
   const answerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const passingScore = 7;
-
-  /*
-   * Safety check.
-   *
-   * MCQTest should always receive questions, but this prevents
-   * the entire page from crashing if the data is temporarily missing.
-   */
-  if (!questions || questions.length === 0) {
-    return (
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8">
-        <div className="text-sm font-medium text-amber-400">
-          Knowledge Test
-        </div>
-
-        <h2 className="mt-2 text-xl font-semibold text-white">
-          Test unavailable
-        </h2>
-
-        <p className="mt-2 text-sm text-zinc-400">
-          No questions are available for this chapter yet.
-        </p>
-      </div>
-    );
-  }
-
-  const question = questions[currentQuestion];
 
   const resetTest = () => {
     if (questionTimerRef.current) {
@@ -96,7 +72,7 @@ export default function MCQTest({
     setIsOpen(true);
   };
 
-  const finishTest = () => {
+  const finishTest = useCallback(() => {
     const finalScore = scoreRef.current;
 
     setScore(finalScore);
@@ -105,9 +81,9 @@ export default function MCQTest({
     if (finalScore >= passingScore) {
       onPassed?.();
     }
-  };
+  }, [onPassed]);
 
-  const moveToNextQuestion = () => {
+  const moveToNextQuestion = useCallback(() => {
     if (currentQuestion >= questions.length - 1) {
       finishTest();
       return;
@@ -116,14 +92,14 @@ export default function MCQTest({
     setCurrentQuestion((previous) => previous + 1);
     setSelectedAnswer(null);
     setTimeLeft(15);
-  };
+  }, [currentQuestion, finishTest, questions.length]);
 
   const handleAnswer = (index: number) => {
     if (selectedAnswer !== null || finished) {
       return;
     }
 
-    const isCorrect = index === question.answer;
+    const isCorrect = index === questions[currentQuestion].answer;
 
     setSelectedAnswer(index);
 
@@ -145,14 +121,13 @@ export default function MCQTest({
       return;
     }
 
-    if (timeLeft === 0) {
-      moveToNextQuestion();
-      return;
-    }
-
     questionTimerRef.current = setTimeout(() => {
-      setTimeLeft((previous) => previous - 1);
-    }, 1000);
+      if (timeLeft === 0) {
+        moveToNextQuestion();
+      } else {
+        setTimeLeft((previous) => previous - 1);
+      }
+    }, timeLeft === 0 ? 0 : 1000);
 
     return () => {
       if (questionTimerRef.current) {
@@ -165,6 +140,7 @@ export default function MCQTest({
     selectedAnswer,
     timeLeft,
     currentQuestion,
+    moveToNextQuestion,
   ]);
 
   /*
@@ -204,6 +180,32 @@ export default function MCQTest({
       }
     };
   }, []);
+
+  /*
+   * Safety check.
+   *
+   * MCQTest should always receive questions, but this prevents
+   * the entire page from crashing if the data is temporarily missing.
+   */
+  if (!questions || questions.length === 0) {
+    return (
+      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8">
+        <div className="text-sm font-medium text-amber-400">
+          Knowledge Test
+        </div>
+
+        <h2 className="mt-2 text-xl font-semibold text-white">
+          Test unavailable
+        </h2>
+
+        <p className="mt-2 text-sm text-zinc-400">
+          No questions are available for this chapter yet.
+        </p>
+      </div>
+    );
+  }
+
+  const question = questions[currentQuestion];
 
   if (!isOpen) {
     return (
@@ -297,7 +299,10 @@ export default function MCQTest({
 
               {score >= passingScore && (
                 <button
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false)
+                    onContinue?.();
+                  }}
                   className="rounded-lg border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-800"
                 >
                   Continue →

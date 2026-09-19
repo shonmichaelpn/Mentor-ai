@@ -1,0 +1,2051 @@
+[
+  {
+    "id": 1,
+    "title": "Variables & Data Types",
+    "description": "Learn how Python stores information using variables and understand the different types of values your programs can work with.",
+    "sections": [
+      {
+        "title": "What Are Variables?",
+        "content": "A variable is a named label used to store a value in a Python program. Instead of working directly with a value every time, we give it a name and use that name later. Variables are useful when information needs to be stored, reused, displayed, or changed while a program runs. In Python, you do not need to declare a variable's type in advance — you simply assign a value to a name.",
+        "examples": [
+          {
+            "title": "Storing a player's name",
+            "code": "player_name = \"Shadow\"\nprint(player_name)",
+            "explanation": "The variable player_name stores the string value \"Shadow\". We can use player_name anywhere we need the player's name."
+          },
+          {
+            "title": "Storing a changing value",
+            "code": "health = 100\nhealth = 75\nprint(health)",
+            "explanation": "Python variables can be reassigned freely. The value of health is changed from 100 to 75."
+          }
+        ]
+      },
+      {
+        "title": "Naming Variables & Dynamic Typing",
+        "content": "Python variable names should be lowercase with underscores between words (this style is called snake_case), for example player_score rather than PlayerScore. Names cannot start with a number and cannot use reserved keywords like class or return.\n\nPython is dynamically typed, which means a variable does not have to be permanently associated with one data type. The same variable can hold a number, then later hold a string.",
+        "examples": [
+          {
+            "title": "Snake case naming",
+            "code": "player_score = 100\nis_online = True",
+            "explanation": "Multi-word variable names are written in snake_case, separated by underscores."
+          },
+          {
+            "title": "A variable can change type",
+            "code": "value = 10\nvalue = \"ten\"\nprint(value)",
+            "explanation": "Because Python is dynamically typed, value can hold a number and later hold a string without any special syntax."
+          }
+        ]
+      },
+      {
+        "title": "Numbers: int and float",
+        "content": "Python has two main numeric types: int for whole numbers and float for decimal numbers. Python automatically decides which type to use based on how the value is written.",
+        "examples": [
+          {
+            "title": "Integers and floats",
+            "code": "level = 25\nprice = 49.99\nprint(level)\nprint(price)",
+            "explanation": "level is an int because it has no decimal point, while price is a float because it includes one."
+          }
+        ]
+      },
+      {
+        "title": "Strings",
+        "content": "A string represents text and is created using single quotes, double quotes, or triple quotes for multi-line text. Strings are commonly used for names, messages, usernames, and other text-based information.",
+        "examples": [
+          {
+            "title": "Creating strings",
+            "code": "player_name = \"Shadow\"\ngreeting = 'Welcome back'\nprint(player_name)\nprint(greeting)",
+            "explanation": "Both single and double quotes create valid strings in Python; the choice is mostly a matter of style."
+          }
+        ]
+      },
+      {
+        "title": "Booleans and None",
+        "content": "A boolean represents either True or False (note the capital letters in Python). Booleans are commonly used for conditions, permissions, and feature flags.\n\nNone is Python's way of representing the intentional absence of a value, similar to null in other languages.",
+        "examples": [
+          {
+            "title": "Boolean and None values",
+            "code": "is_online = True\nhas_premium = False\nselected_weapon = None\n\nprint(is_online)\nprint(selected_weapon)",
+            "explanation": "is_online and has_premium hold boolean values. selected_weapon holds None because no weapon has been chosen yet."
+          }
+        ]
+      },
+      {
+        "title": "Lists and Dictionaries (a quick preview)",
+        "content": "Python also has more complex data types for grouping values together: lists, which store ordered collections, and dictionaries, which store key-value pairs. These are covered in detail in later chapters, but it helps to see them early.",
+        "examples": [
+          {
+            "title": "A quick look at a list",
+            "code": "inventory = [\"Sword\", \"Shield\", \"Potion\"]\nprint(inventory)",
+            "explanation": "A list groups several related values together in one ordered collection."
+          }
+        ]
+      },
+      {
+        "title": "The type() Function",
+        "content": "The type() function lets you check the data type of a value at runtime. This can be useful when debugging, validating data, or understanding what a variable currently contains.",
+        "examples": [
+          {
+            "title": "Checking data types",
+            "code": "name = \"Shadow\"\nlevel = 25\nonline = True\n\nprint(type(name))\nprint(type(level))\nprint(type(online))",
+            "explanation": "type() returns <class 'str'>, <class 'int'>, and <class 'bool'> for these three values."
+          },
+          {
+            "title": "Checking the type of None",
+            "code": "value = None\nprint(type(value))",
+            "explanation": "Python returns <class 'NoneType'> for a variable that holds None."
+          }
+        ]
+      },
+      {
+        "title": "Real-World Usage",
+        "content": "Choosing appropriate variable names and data types makes programs easier to understand and maintain. Different applications naturally use different types of information.",
+        "examples": [
+          {
+            "title": "Gaming",
+            "code": "player_name = \"Shadow\"\nhealth = 100\nscore = 0\nis_online = True",
+            "explanation": "A game might use strings for names, numbers for health and scores, and booleans for player states."
+          },
+          {
+            "title": "E-commerce",
+            "code": "product_name = \"Gaming Mouse\"\nprice = 2499\nstock = 12\nis_available = True",
+            "explanation": "An online store can use strings for product names, numbers for prices and stock, and booleans for availability."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "How do you create a variable holding the text \"Shadow\" in Python?",
+        "options": [
+          "var name = \"Shadow\"",
+          "name := \"Shadow\"",
+          "name = \"Shadow\"",
+          "string name = \"Shadow\""
+        ],
+        "answer": 2,
+        "explanation": "Python variables are created simply by assigning a value with the = operator, no keyword required."
+      },
+      {
+        "question": "What will this code print?\n\nscore = 50\nscore = 100\nprint(score)",
+        "options": [
+          "50",
+          "100",
+          "None",
+          "An error"
+        ],
+        "answer": 1,
+        "explanation": "Python variables can always be reassigned, so the final printed value is 100."
+      },
+      {
+        "question": "Which naming style is recommended for Python variable names?",
+        "options": [
+          "camelCase",
+          "PascalCase",
+          "snake_case",
+          "kebab-case"
+        ],
+        "answer": 2,
+        "explanation": "Python convention (PEP 8) recommends snake_case for variable names."
+      },
+      {
+        "question": "What does type(\"Hello\") return?",
+        "options": [
+          "<class 'text'>",
+          "<class 'str'>",
+          "<class 'char'>",
+          "<class 'object'>"
+        ],
+        "answer": 1,
+        "explanation": "Text surrounded by quotes is a string, and type() reports it as <class 'str'>."
+      },
+      {
+        "question": "Which value would be most appropriate for storing a player's health?",
+        "options": [
+          "A boolean",
+          "A string",
+          "An int",
+          "None"
+        ],
+        "answer": 2,
+        "explanation": "Health is numeric because it can be used in calculations, so an int is appropriate."
+      },
+      {
+        "question": "What does None represent in Python?",
+        "options": [
+          "The number zero",
+          "An empty string",
+          "The intentional absence of a value",
+          "A boolean false"
+        ],
+        "answer": 2,
+        "explanation": "None represents the intentional absence of a value, similar to null in other languages."
+      },
+      {
+        "question": "Which of these is a valid boolean value in Python?",
+        "options": [
+          "true",
+          "TRUE",
+          "True",
+          "1true"
+        ],
+        "answer": 2,
+        "explanation": "Python booleans are written with a capital letter: True and False."
+      },
+      {
+        "question": "What is Python's dynamic typing?",
+        "options": [
+          "Every variable must declare a type",
+          "A variable is not permanently tied to one type and can hold different types over time",
+          "Only numbers can be stored in variables",
+          "Types are decided by the operating system"
+        ],
+        "answer": 1,
+        "explanation": "Dynamic typing means a variable's type is determined by the value currently assigned to it, and this can change."
+      },
+      {
+        "question": "What will this code print?\n\nvalue = 49.99\nprint(type(value))",
+        "options": [
+          "<class 'int'>",
+          "<class 'float'>",
+          "<class 'decimal'>",
+          "<class 'number'>"
+        ],
+        "answer": 1,
+        "explanation": "A value written with a decimal point is a float in Python."
+      },
+      {
+        "question": "A shopping application needs to store whether a product is currently available. Which value is most appropriate?",
+        "options": [
+          "is_available = True",
+          "is_available = \"yes\"",
+          "is_available = 1",
+          "is_available = \"available\""
+        ],
+        "answer": 0,
+        "explanation": "A boolean clearly represents a yes/no state such as product availability."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Profile",
+      "scenario": "You are building the profile system for a multiplayer game. The game needs to store basic information about a player before displaying it in the game interface.",
+      "instructions": [
+        "Create variables to store the player's name, level, health, and online status.",
+        "Store the player's name as a string, level and health as numbers, and online status as a boolean.",
+        "Use print() to display each value.",
+        "Use type() to display the data type of each variable.",
+        "Simulate the player leveling up by changing the level after it is created.",
+        "Use snake_case for all variable names."
+      ],
+      "starterCode": "# Create the player profile here\n\n\n# Display the player's information\n",
+      "expectedConcepts": [
+        "variable assignment",
+        "string",
+        "int",
+        "boolean",
+        "type()",
+        "print()",
+        "variable reassignment"
+      ],
+      "evaluationCriteria": [
+        "Creates a player_name variable holding a string.",
+        "Creates level and health variables holding numbers.",
+        "Creates an is_online variable holding a boolean.",
+        "Uses print() to display the player's information.",
+        "Uses type() to inspect the data types of the player information.",
+        "Demonstrates reassignment of the level variable.",
+        "Uses snake_case naming."
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "title": "Operators & Conditions",
+    "description": "Learn how Python calculates values, compares information, combines conditions, and makes decisions using operators and conditional statements.",
+    "sections": [
+      {
+        "title": "Expressions & Operators",
+        "content": "An expression is a piece of Python code that produces a value. Operators are symbols or keywords that tell Python how to work with those values.\n\nFor example, 5 + 3 is an expression that produces the value 8. The + symbol is an operator.\n\nA useful mental model is: Values -> Operations -> New values.",
+        "examples": [
+          {
+            "title": "Calculating a game score",
+            "code": "base_score = 100\nbonus = 50\ntotal_score = base_score + bonus\n\nprint(total_score)",
+            "explanation": "The addition operator combines two numeric values to produce a new value."
+          }
+        ]
+      },
+      {
+        "title": "Arithmetic Operators",
+        "content": "Arithmetic operators are used to perform mathematical calculations.\n\nThe most common arithmetic operators are +, -, *, / (division that always returns a float), // (floor division), % (remainder), and ** (exponent).\n\nThe % operator is especially useful in programming — it gives you what is left over after division.",
+        "examples": [
+          {
+            "title": "Updating player health",
+            "code": "health = 100\nhealth = health - 25\n\nprint(health)",
+            "explanation": "Arithmetic operators allow a program to update values as something happens. Here, taking damage reduces the player's health by 25."
+          },
+          {
+            "title": "Using the remainder and exponent operators",
+            "code": "items = 7\nremainder = items % 2\nsquared = 4 ** 2\n\nprint(remainder)\nprint(squared)",
+            "explanation": "% returns the remainder after division, and ** raises a number to a power."
+          }
+        ]
+      },
+      {
+        "title": "Assignment & Updating Values",
+        "content": "The assignment operator = is used to give a variable a value. This does not mean mathematical equality — it means Python should store the value on the right in the variable on the left.\n\nYou can also update a variable using compound assignment operators such as +=, -=, *=, and /=.",
+        "examples": [
+          {
+            "title": "Updating a player's score",
+            "code": "score = 100\nscore += 25\n\nprint(score)",
+            "explanation": "The += operator updates the existing value by adding another value, shorthand for score = score + 25."
+          }
+        ]
+      },
+      {
+        "title": "Comparison Operators",
+        "content": "Comparison operators are used to ask questions about values. The result of a comparison is always a boolean: either True or False.\n\nCommon comparison operators include >, <, >=, <=, == (equal to), and != (not equal to).",
+        "examples": [
+          {
+            "title": "Checking whether a player passed",
+            "code": "score = 75\npassed = score >= 50\n\nprint(passed)",
+            "explanation": "The comparison produces a boolean value that can later be used by an if statement to decide whether the player passed."
+          }
+        ]
+      },
+      {
+        "title": "== vs is",
+        "content": "Python has two operators that can seem similar: == compares whether two values are equal, while is checks whether two variables refer to the exact same object in memory. For comparing values (numbers, strings, lists), use ==. is is usually reserved for comparing something to None.",
+        "examples": [
+          {
+            "title": "Comparing values vs identity",
+            "code": "selected_weapon = None\n\nprint(selected_weapon == None)\nprint(selected_weapon is None)",
+            "explanation": "Both work here, but is None is the preferred, more explicit way to check for None in Python."
+          }
+        ]
+      },
+      {
+        "title": "Boolean Logic",
+        "content": "Comparison operators answer individual questions, but real programs often need to evaluate several conditions together. Python provides the keywords and, or, and not for this.\n\nand requires both conditions to be true. or requires at least one condition to be true. not reverses a boolean value.",
+        "examples": [
+          {
+            "title": "Checking access to a game area",
+            "code": "is_logged_in = True\nhas_permission = True\n\nif is_logged_in and has_permission:\n    print(\"Access granted\")",
+            "explanation": "Both conditions must be True before access is granted."
+          },
+          {
+            "title": "Checking multiple valid roles",
+            "code": "is_admin = False\nis_moderator = True\n\nif is_admin or is_moderator:\n    print(\"Staff access\")",
+            "explanation": "The or keyword allows either condition to satisfy the requirement."
+          }
+        ]
+      },
+      {
+        "title": "Making Decisions with if",
+        "content": "An if statement allows your program to execute code only when a condition is True. Python uses indentation (not curly braces) to define the block of code controlled by the condition, followed by a colon.",
+        "examples": [
+          {
+            "title": "Checking whether a player has enough health",
+            "code": "health = 75\n\nif health > 0:\n    print(\"Player is alive\")",
+            "explanation": "The condition determines whether the message should be printed. The indented line belongs to the if block."
+          }
+        ]
+      },
+      {
+        "title": "elif and else",
+        "content": "An if statement handles one condition, but programs often need to handle alternative outcomes. Use else when you want code to run when the if condition is False, and elif when there are several possible conditions to check in order.",
+        "examples": [
+          {
+            "title": "Determining player rank",
+            "code": "score = 85\n\nif score >= 90:\n    print(\"Gold\")\nelif score >= 70:\n    print(\"Silver\")\nelse:\n    print(\"Bronze\")",
+            "explanation": "Python checks the conditions from top to bottom. Once it finds a condition that is True, it runs that block and skips the rest."
+          }
+        ]
+      },
+      {
+        "title": "Truthiness & Falsy Values",
+        "content": "Python does not always require a condition to be explicitly True or False. Values can be evaluated in a boolean context.\n\nCommon falsy values include False, 0, 0.0, \"\" (an empty string), [] (an empty list), {} (an empty dictionary), and None. Most other values are truthy.",
+        "examples": [
+          {
+            "title": "Checking for a username",
+            "code": "username = \"Alex\"\n\nif username:\n    print(\"Username exists\")",
+            "explanation": "Because a non-empty string is truthy, the code runs. An empty string would be falsy."
+          }
+        ]
+      },
+      {
+        "title": "Writing Conditions Clearly",
+        "content": "Knowing the operators is only part of becoming a good developer. You also need to write conditions that other developers can understand. Prefer conditions that directly express the business rule, use meaningful variable names, and avoid unnecessarily complicated expressions.",
+        "examples": [
+          {
+            "title": "Readable permission check",
+            "code": "is_logged_in = True\nis_admin = False\nis_moderator = True\n\nif is_logged_in and (is_admin or is_moderator):\n    print(\"Access granted\")",
+            "explanation": "Parentheses make the intended logic easier to understand."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What does the expression 10 + 5 produce?",
+        "options": ["10", "15", "105", "True"],
+        "answer": 1,
+        "explanation": "The + operator performs addition when both operands are numbers, producing 15."
+      },
+      {
+        "question": "What does the % operator return in Python?",
+        "options": [
+          "The result of multiplication",
+          "The remainder after division",
+          "A percentage of a number",
+          "The result of floor division"
+        ],
+        "answer": 1,
+        "explanation": "The % operator returns the remainder left after one number is divided by another."
+      },
+      {
+        "question": "What does // do in Python?",
+        "options": [
+          "Starts a comment",
+          "Performs floor (integer) division",
+          "Performs exponentiation",
+          "Compares two values"
+        ],
+        "answer": 1,
+        "explanation": "// performs floor division, dividing and rounding down to the nearest whole number."
+      },
+      {
+        "question": "What will this code print?\n\nscore = 75\nprint(score >= 50)",
+        "options": ["75", "50", "True", "False"],
+        "answer": 2,
+        "explanation": "75 is greater than or equal to 50, so the comparison produces the boolean value True."
+      },
+      {
+        "question": "Which is generally preferred for checking whether a value is None?",
+        "options": ["value == None", "value is None", "value = None", "value != True"],
+        "answer": 1,
+        "explanation": "is None is the idiomatic and explicit way to check identity with None in Python."
+      },
+      {
+        "question": "What does 'and' mean in a Python condition?",
+        "options": [
+          "At least one condition must be true",
+          "Both conditions must be true",
+          "The value should be reversed",
+          "The values should be added"
+        ],
+        "answer": 1,
+        "explanation": "The and keyword produces a truthy result only when both conditions are true."
+      },
+      {
+        "question": "What will this code print?\n\nscore = 40\n\nif score >= 50:\n    print(\"Passed\")\nelse:\n    print(\"Failed\")",
+        "options": ["Passed", "Failed", "40", "Nothing"],
+        "answer": 1,
+        "explanation": "40 >= 50 is False, so the else block runs and prints Failed."
+      },
+      {
+        "question": "What is the purpose of elif?",
+        "options": [
+          "To declare a new variable",
+          "To check another condition when the previous condition was False",
+          "To repeat code forever",
+          "To compare strings only"
+        ],
+        "answer": 1,
+        "explanation": "elif lets a program check another condition when the preceding if or elif condition was False."
+      },
+      {
+        "question": "Which value is falsy in Python?",
+        "options": ["\"hello\"", "100", "[]", "-1"],
+        "answer": 2,
+        "explanation": "An empty list [] is falsy in Python."
+      },
+      {
+        "question": "How does Python define which code belongs to an if block?",
+        "options": [
+          "Curly braces {}",
+          "Indentation, following a colon",
+          "Parentheses ()",
+          "Square brackets []"
+        ],
+        "answer": 1,
+        "explanation": "Python uses consistent indentation after a colon to define blocks, instead of curly braces."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Score Checker",
+      "scenario": "You are building a game where a player's score determines their result. Create a small program that evaluates the player's score and prints the appropriate result.",
+      "instructions": [
+        "Create a variable called score and store a numeric score in it.",
+        "If the score is 50 or higher, print \"Passed\".",
+        "If the score is below 50, print \"Failed\".",
+        "If the score is 90 or higher, print \"Excellent\" instead of \"Passed\".",
+        "Use comparison operators to make the decisions.",
+        "Use if, elif, and else to handle the different outcomes.",
+        "Test your program with at least two different score values."
+      ],
+      "starterCode": "score = 0\n\n# Write your solution below\n",
+      "expectedConcepts": [
+        "comparison operators",
+        "boolean expressions",
+        "if statements",
+        "elif",
+        "else",
+        "conditional logic"
+      ],
+      "evaluationCriteria": [
+        "Creates a numeric score variable.",
+        "Correctly identifies scores of 90 or higher as Excellent.",
+        "Correctly identifies scores from 50 through 89 as Passed.",
+        "Correctly identifies scores below 50 as Failed.",
+        "Uses comparison operators for the conditions.",
+        "Uses if, elif, and else appropriately.",
+        "Produces the correct output for different score values."
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "title": "Loops & Iteration",
+    "description": "Learn how to repeat code efficiently using for and while loops, iterate over sequences with range(), and control iterations with break and continue.",
+    "sections": [
+      {
+        "title": "Why Do We Need Loops?",
+        "content": "Loops allow you to repeat a block of code without writing the same statements again and again. They are useful when working with repeated tasks, collections of data, and game logic.",
+        "examples": [
+          {
+            "title": "Repeating a message",
+            "code": "print(\"Welcome\")\nprint(\"Welcome\")\nprint(\"Welcome\")",
+            "explanation": "Writing the same statement repeatedly becomes inefficient. A loop allows us to repeat the operation with much less code."
+          }
+        ]
+      },
+      {
+        "title": "The for Loop and range()",
+        "content": "A for loop in Python is commonly used to iterate a specific number of times, using the range() function, or to iterate directly over items in a sequence such as a list or string.",
+        "examples": [
+          {
+            "title": "Count from 1 to 5",
+            "code": "for i in range(1, 6):\n    print(i)",
+            "explanation": "range(1, 6) produces the numbers 1 through 5. The loop body runs once for each number."
+          }
+        ]
+      },
+      {
+        "title": "Looping Over Sequences",
+        "content": "A for loop can iterate directly over the items of a list, string, or other sequence, without needing an index.",
+        "examples": [
+          {
+            "title": "Looping over a list",
+            "code": "players = [\"Alex\", \"Sam\", \"John\"]\n\nfor player in players:\n    print(player)",
+            "explanation": "The loop variable player takes on each value in the players list, one at a time."
+          }
+        ]
+      },
+      {
+        "title": "The while Loop",
+        "content": "A while loop repeats as long as its condition remains True. It is useful when the number of iterations is not known in advance.",
+        "examples": [
+          {
+            "title": "Using while",
+            "code": "count = 1\n\nwhile count <= 5:\n    print(count)\n    count += 1",
+            "explanation": "The condition is checked before every iteration. count must be updated or the loop could continue forever."
+          }
+        ]
+      },
+      {
+        "title": "break",
+        "content": "The break statement immediately exits the loop. It is useful when you have found what you are looking for or when a condition requires the loop to stop early.",
+        "examples": [
+          {
+            "title": "Stop when a value is found",
+            "code": "for i in range(1, 11):\n    if i == 5:\n        break\n\n    print(i)",
+            "explanation": "When i reaches 5, break exits the loop immediately, so 5 and the remaining numbers are not printed."
+          }
+        ]
+      },
+      {
+        "title": "continue",
+        "content": "The continue statement skips the current iteration and moves to the next iteration of the loop.",
+        "examples": [
+          {
+            "title": "Skip an iteration",
+            "code": "for i in range(1, 6):\n    if i == 3:\n        continue\n\n    print(i)",
+            "explanation": "When i is 3, continue skips the rest of that iteration. The loop then continues with 4."
+          }
+        ]
+      },
+      {
+        "title": "enumerate()",
+        "content": "Sometimes you need both the index and the value while looping over a sequence. The enumerate() function provides both at once, which is more Pythonic than manually tracking an index.",
+        "examples": [
+          {
+            "title": "Using enumerate",
+            "code": "items = [\"Sword\", \"Shield\", \"Potion\"]\n\nfor index, item in enumerate(items):\n    print(index, item)",
+            "explanation": "enumerate() yields pairs of (index, value) for each item in the list."
+          }
+        ]
+      },
+      {
+        "title": "Nested Loops",
+        "content": "A loop can be placed inside another loop. This is called a nested loop and is useful for working with grids, tables, combinations, and other multi-level structures.",
+        "examples": [
+          {
+            "title": "Nested loop",
+            "code": "for row in range(1, 4):\n    for column in range(1, 4):\n        print(row, column)",
+            "explanation": "For every row, the inner loop runs through all three columns."
+          }
+        ]
+      },
+      {
+        "title": "Choosing the Right Loop",
+        "content": "Use a for loop when iterating over a known sequence or a fixed number of times using range(). Use a while loop when repetition depends mainly on a condition rather than a known number of iterations.",
+        "examples": [
+          {
+            "title": "Game countdown",
+            "code": "for seconds in range(5, 0, -1):\n    print(seconds)\n\nprint(\"Start!\")",
+            "explanation": "range(5, 0, -1) counts down from 5 to 1, which is a natural fit for a for loop."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is the main purpose of a loop?",
+        "options": ["To store multiple values", "To repeat a block of code", "To define a function", "To create a dictionary"],
+        "answer": 1,
+        "explanation": "Loops repeat a block of code while a condition or iteration rule allows it."
+      },
+      {
+        "question": "What is the output of this code?\n\nfor i in range(1, 4):\n    print(i)",
+        "options": ["0 1 2", "1 2 3", "1 2", "2 3 4"],
+        "answer": 1,
+        "explanation": "range(1, 4) produces the numbers 1, 2, and 3."
+      },
+      {
+        "question": "Which loop checks its condition before executing its body?",
+        "options": ["for and while both do", "Neither", "Only for", "Only while"],
+        "answer": 0,
+        "explanation": "Both for and while loops in Python check their condition (or exhaust their iterable) before each iteration."
+      },
+      {
+        "question": "What does break do inside a loop?",
+        "options": ["Skips one iteration", "Restarts the loop", "Exits the loop", "Pauses the program permanently"],
+        "answer": 2,
+        "explanation": "break immediately exits the current loop."
+      },
+      {
+        "question": "What does continue do inside a loop?",
+        "options": ["Exits the loop", "Skips the current iteration", "Stops the program", "Creates another loop"],
+        "answer": 1,
+        "explanation": "continue skips the remaining code in the current iteration and proceeds to the next one."
+      },
+      {
+        "question": "What does range(1, 6) produce?",
+        "options": ["1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5", "0, 1, 2, 3, 4, 5", "6"],
+        "answer": 1,
+        "explanation": "range(1, 6) produces numbers starting at 1 up to, but not including, 6."
+      },
+      {
+        "question": "What does enumerate() provide during a loop?",
+        "options": [
+          "Only the value",
+          "Only the index",
+          "Both the index and the value",
+          "The total length of the sequence"
+        ],
+        "answer": 2,
+        "explanation": "enumerate() yields (index, value) pairs for each item in a sequence."
+      },
+      {
+        "question": "What can cause an infinite loop?",
+        "options": [
+          "A condition that eventually becomes False",
+          "A loop variable updated correctly",
+          "A while condition that never becomes False",
+          "Using print() inside a loop"
+        ],
+        "answer": 2,
+        "explanation": "If the while loop condition never becomes False, the loop can continue indefinitely."
+      },
+      {
+        "question": "What is a nested loop?",
+        "options": ["A loop without a condition", "A loop inside another loop", "A loop that uses only numbers", "A loop that runs once"],
+        "answer": 1,
+        "explanation": "A nested loop is a loop placed inside another loop."
+      },
+      {
+        "question": "Which range() call counts down from 5 to 1?",
+        "options": ["range(5, 0, -1)", "range(1, 5)", "range(0, 5)", "range(5, 1)"],
+        "answer": 0,
+        "explanation": "range(5, 0, -1) starts at 5, stops before 0, and steps by -1, producing 5, 4, 3, 2, 1."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Game Countdown",
+      "scenario": "You are building a countdown system for a game. Before the game starts, the program should count down from 5 to 1 and then display a start message.",
+      "instructions": [
+        "Create a loop that counts down from 5 to 1.",
+        "Print each countdown number using print().",
+        "After the countdown finishes, print \"Game Started!\".",
+        "Use a for loop with range() for the countdown.",
+        "Update or step the loop variable correctly on each iteration."
+      ],
+      "starterCode": "# Write your solution here\n\n\n# Print the start message here\n",
+      "expectedConcepts": [
+        "for loop",
+        "range()",
+        "loop step",
+        "countdown logic",
+        "print()"
+      ],
+      "evaluationCriteria": [
+        "Uses a for loop with range().",
+        "Starts the countdown at 5.",
+        "Counts down to 1.",
+        "Prints 5, 4, 3, 2, and 1.",
+        "Prints \"Game Started!\" after the loop."
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "title": "Functions",
+    "description": "Learn how to create reusable blocks of code using functions, parameters, return values, default arguments, and lambda functions.",
+    "sections": [
+      {
+        "title": "What Are Functions?",
+        "content": "A function is a reusable block of code designed to perform a specific task. Instead of writing the same code repeatedly, you can place it inside a function and call it whenever you need it.",
+        "examples": [
+          {
+            "title": "A simple function",
+            "code": "def greet():\n    print(\"Hello!\")\n\ngreet()",
+            "explanation": "The function is declared with def and the name greet, and called using greet()."
+          }
+        ]
+      },
+      {
+        "title": "Creating and Calling Functions",
+        "content": "A function is created using the def keyword, followed by a name, parentheses, and a colon. The indented code inside the function runs when the function is called.",
+        "examples": [
+          {
+            "title": "Calling a function",
+            "code": "def start_game():\n    print(\"Game started!\")\n\nstart_game()",
+            "explanation": "Defining a function does not execute it. The function runs when it is called."
+          }
+        ]
+      },
+      {
+        "title": "Parameters and Arguments",
+        "content": "Parameters allow a function to receive information. The values passed to those parameters when calling the function are called arguments.",
+        "examples": [
+          {
+            "title": "Using a parameter",
+            "code": "def greet_player(name):\n    print(\"Welcome, \" + name)\n\ngreet_player(\"Shadow\")",
+            "explanation": "name is the parameter, while \"Shadow\" is the argument passed to the function."
+          }
+        ]
+      },
+      {
+        "title": "Return Values",
+        "content": "Functions can return a value using the return statement. The returned value can then be stored in a variable or used in another expression. If a function has no return statement, it returns None.",
+        "examples": [
+          {
+            "title": "Returning a value",
+            "code": "def add(a, b):\n    return a + b\n\nresult = add(10, 5)\nprint(result)",
+            "explanation": "The function returns 15, which is stored in result."
+          }
+        ]
+      },
+      {
+        "title": "Default Parameters",
+        "content": "Default parameters allow you to provide a fallback value when an argument is not supplied when the function is called.",
+        "examples": [
+          {
+            "title": "Default parameter",
+            "code": "def greet_player(name=\"Player\"):\n    print(\"Welcome, \" + name)\n\ngreet_player()\ngreet_player(\"Shadow\")",
+            "explanation": "If no name is provided, Python uses the default value \"Player\"."
+          }
+        ]
+      },
+      {
+        "title": "Keyword Arguments",
+        "content": "Arguments can also be passed by explicitly naming the parameter, called a keyword argument. This can make function calls clearer and lets you pass arguments in any order.",
+        "examples": [
+          {
+            "title": "Using keyword arguments",
+            "code": "def calculate_damage(attack, bonus):\n    return attack + bonus\n\nprint(calculate_damage(bonus=10, attack=50))",
+            "explanation": "Because the arguments are named, they can be passed in a different order than the parameters were defined."
+          }
+        ]
+      },
+      {
+        "title": "Lambda Functions",
+        "content": "A lambda is a small, anonymous function written in a single line, useful for short operations that are needed only once, often as an argument to another function.",
+        "examples": [
+          {
+            "title": "A simple lambda",
+            "code": "add = lambda a, b: a + b\n\nprint(add(5, 3))",
+            "explanation": "The lambda takes a and b and implicitly returns their sum, without needing a def block."
+          }
+        ]
+      },
+      {
+        "title": "Function Scope",
+        "content": "Variables created inside a function are generally available only inside that function. This is called local scope, and it helps keep data organized and prevents unrelated code from changing it.",
+        "examples": [
+          {
+            "title": "Local variable",
+            "code": "def show_score():\n    score = 100\n    print(score)\n\nshow_score()",
+            "explanation": "The score variable belongs to the function and exists only while the function runs."
+          }
+        ]
+      },
+      {
+        "title": "Writing Reusable Functions",
+        "content": "Good functions usually perform one clear task and can be reused with different values. Breaking a program into small functions makes code easier to understand and maintain.",
+        "examples": [
+          {
+            "title": "Reusable game function",
+            "code": "def calculate_health(current_health, damage):\n    return current_health - damage\n\nprint(calculate_health(100, 20))\nprint(calculate_health(80, 30))",
+            "explanation": "The same function can calculate the remaining health for different players or situations."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is the main purpose of a function?",
+        "options": ["To store only numbers", "To create reusable code", "To stop a program", "To create a dictionary"],
+        "answer": 1,
+        "explanation": "Functions allow you to group reusable code that can be executed when needed."
+      },
+      {
+        "question": "Which keyword is used to define a function in Python?",
+        "options": ["function", "def", "func", "lambda"],
+        "answer": 1,
+        "explanation": "Functions are defined using the def keyword, followed by the function name and parentheses."
+      },
+      {
+        "question": "In def greet(name):, what is name?",
+        "options": ["An argument", "A parameter", "A return value", "An operator"],
+        "answer": 1,
+        "explanation": "name is a parameter because it receives a value when the function is called."
+      },
+      {
+        "question": "What does the return statement do?",
+        "options": ["Repeats a function", "Creates a parameter", "Sends a value back from a function", "Deletes a function"],
+        "answer": 2,
+        "explanation": "return sends a value back to the code that called the function."
+      },
+      {
+        "question": "What is the output of this code?\n\ndef add(a, b):\n    return a + b\n\nprint(add(2, 3))",
+        "options": ["2", "3", "5", "23"],
+        "answer": 2,
+        "explanation": "The function adds 2 and 3 and returns 5."
+      },
+      {
+        "question": "Which syntax creates a lambda function that adds two numbers?",
+        "options": ["def add(a, b) => a + b", "lambda a, b: a + b", "lambda(a, b) { a + b }", "add => (a, b): a + b"],
+        "answer": 1,
+        "explanation": "lambda a, b: a + b is the syntax for a small anonymous function."
+      },
+      {
+        "question": "What is a keyword argument?",
+        "options": [
+          "An argument passed by explicitly naming its parameter",
+          "A reserved Python word",
+          "An argument that must be first",
+          "A default value only"
+        ],
+        "answer": 0,
+        "explanation": "A keyword argument is passed using name=value syntax, matching an argument to its parameter by name."
+      },
+      {
+        "question": "What happens when a default parameter is used and no argument is given?",
+        "options": [
+          "The function cannot run",
+          "A fallback value is used automatically",
+          "The function runs twice",
+          "The parameter becomes global"
+        ],
+        "answer": 1,
+        "explanation": "A default parameter provides a fallback value when the caller does not supply one."
+      },
+      {
+        "question": "Where is a variable declared inside a function normally accessible?",
+        "options": ["Everywhere", "Only inside its function's local scope", "Only inside lists", "Only inside dictionaries"],
+        "answer": 1,
+        "explanation": "Variables declared inside a function are normally local to that function."
+      },
+      {
+        "question": "What does a function return if it has no return statement?",
+        "options": ["0", "An empty string", "None", "An error"],
+        "answer": 2,
+        "explanation": "A Python function without a return statement implicitly returns None."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Damage Calculator",
+      "scenario": "In a game, a player's final damage depends on their base attack and a damage bonus. Create a reusable function that calculates the final damage.",
+      "instructions": [
+        "Create a function called calculate_damage that accepts attack and bonus as parameters.",
+        "Return the sum of attack and bonus from the function.",
+        "Call the function with at least two different sets of values.",
+        "Store the returned result in a variable at least once.",
+        "Use print() to display the calculated damage.",
+        "Use a return statement inside the function."
+      ],
+      "starterCode": "def calculate_damage(attack, bonus):\n    # Write your solution here\n    pass\n\n# Call your function here",
+      "expectedConcepts": [
+        "Function definition",
+        "Parameters",
+        "Arguments",
+        "Return values",
+        "Function calls",
+        "Reusable functions"
+      ],
+      "evaluationCriteria": [
+        "Defines a function named calculate_damage.",
+        "The function accepts attack and bonus parameters.",
+        "Returns the sum of attack and bonus.",
+        "Calls the function with different values.",
+        "Stores a returned result in a variable.",
+        "Prints the calculated damage using print().",
+        "Uses a return statement."
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "title": "Lists",
+    "description": "Learn how to store collections of values in lists, access individual elements, modify lists, slice them, and iterate through their contents.",
+    "sections": [
+      {
+        "title": "What Are Lists?",
+        "content": "A list is a data structure used to store multiple values in a single variable. Lists are useful when you need to work with a collection of related values such as player names, game scores, products, or inventory items.\n\nLists are ordered and mutable, meaning their contents can change after they are created."
+      },
+      {
+        "title": "Creating Lists",
+        "content": "Lists are created using square brackets []. The values inside the brackets are separated by commas.\n\nA list can contain different types of values, although it is usually easier to work with lists containing related types of data. You can also create an empty list and add values later.",
+        "examples": [
+          {
+            "title": "Creating lists",
+            "code": "players = [\"Alex\", \"Sam\", \"John\"]\nscores = [100, 250, 500]\ninventory = []",
+            "explanation": "players and scores are created with initial values, while inventory starts as an empty list."
+          }
+        ]
+      },
+      {
+        "title": "List Indexing",
+        "content": "List indexes start at 0, not 1. The first element has index 0, the second has index 1, and so on. Negative indexes count from the end of the list, so -1 refers to the last element.",
+        "examples": [
+          {
+            "title": "Indexing a list",
+            "code": "weapons = [\"Sword\", \"Bow\", \"Axe\"]\n\nprint(weapons[0])\nprint(weapons[1])\nprint(weapons[-1])",
+            "explanation": "weapons[0] is \"Sword\", weapons[1] is \"Bow\", and weapons[-1] is \"Axe\", the last element."
+          }
+        ]
+      },
+      {
+        "title": "Slicing Lists",
+        "content": "Slicing lets you extract a portion of a list using the syntax list[start:end], where end is not included in the result.",
+        "examples": [
+          {
+            "title": "Slicing a list",
+            "code": "numbers = [10, 20, 30, 40, 50]\n\nprint(numbers[1:3])\nprint(numbers[:2])",
+            "explanation": "numbers[1:3] gives [20, 30]. numbers[:2] starts from the beginning and gives [10, 20]."
+          }
+        ]
+      },
+      {
+        "title": "Changing List Elements",
+        "content": "You can change an existing element by assigning a new value to its index.",
+        "examples": [
+          {
+            "title": "Modifying an element",
+            "code": "inventory = [\"Sword\", \"Shield\", \"Potion\"]\n\ninventory[1] = \"Armor\"\n\nprint(inventory)",
+            "explanation": "The array now contains \"Sword\", \"Armor\", and \"Potion\", because index 1 was reassigned."
+          }
+        ]
+      },
+      {
+        "title": "Adding and Removing Elements",
+        "content": "The append() method adds an element to the end of a list. The remove() method removes the first matching value, and pop() removes and returns an element at a given index (or the last one by default).",
+        "examples": [
+          {
+            "title": "append, remove, and pop",
+            "code": "inventory = [\"Sword\", \"Shield\"]\n\ninventory.append(\"Potion\")\ninventory.remove(\"Shield\")\nremoved_item = inventory.pop()\n\nprint(inventory)\nprint(removed_item)",
+            "explanation": "append() adds \"Potion\", remove() deletes \"Shield\" by value, and pop() removes and returns the last remaining item."
+          }
+        ]
+      },
+      {
+        "title": "The len() Function",
+        "content": "The len() function tells you how many elements are currently stored in a list. The last element can also be accessed using index len(list) - 1, though list[-1] is usually preferred.",
+        "examples": [
+          {
+            "title": "Using len()",
+            "code": "players = [\"Alex\", \"Sam\", \"John\"]\n\nprint(len(players))\nprint(players[len(players) - 1])",
+            "explanation": "len(players) returns 3, and index 2 (length - 1) accesses the last element."
+          }
+        ]
+      },
+      {
+        "title": "Looping Through Lists",
+        "content": "Lists are often processed using loops. A for loop can iterate directly over the elements, or use range(len(list)) when the index itself is needed.",
+        "examples": [
+          {
+            "title": "Looping over a list",
+            "code": "scores = [100, 200, 300]\n\nfor score in scores:\n    print(score)",
+            "explanation": "The loop visits each element of scores in order, without needing an explicit index."
+          }
+        ]
+      },
+      {
+        "title": "Lists in Real Applications",
+        "content": "Lists are used throughout real Python applications. A game can use lists for inventories and scores. A web application might use lists to store products in a cart or results from a database query.",
+        "examples": [
+          {
+            "title": "A shopping cart",
+            "code": "cart = [\"Gaming Mouse\", \"Keyboard\", \"Headset\"]\n\nprint(len(cart))",
+            "explanation": "Understanding lists is important because many real-world data sources return collections as lists."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is a list used for?",
+        "options": ["Storing only one value", "Storing a collection of values", "Creating functions", "Checking conditions"],
+        "answer": 1,
+        "explanation": "Lists store multiple values together in an ordered, mutable collection."
+      },
+      {
+        "question": "What index does the first element of a list have?",
+        "options": ["0", "1", "-1", "It depends on the list"],
+        "answer": 0,
+        "explanation": "Python lists use zero-based indexing, so the first element has index 0."
+      },
+      {
+        "question": "What will this code print?\n\nfruits = [\"Apple\", \"Banana\", \"Orange\"]\nprint(fruits[1])",
+        "options": ["Apple", "Banana", "Orange", "None"],
+        "answer": 1,
+        "explanation": "Index 1 refers to the second element, which is Banana."
+      },
+      {
+        "question": "Which method adds an element to the end of a list?",
+        "options": ["add()", "append()", "insert_end()", "extend_one()"],
+        "answer": 1,
+        "explanation": "append() adds one element to the end of a list."
+      },
+      {
+        "question": "What does numbers[-1] refer to?",
+        "options": ["The first element", "An error", "The last element", "An empty list"],
+        "answer": 2,
+        "explanation": "Negative indexing counts from the end, so -1 refers to the last element."
+      },
+      {
+        "question": "What does the len() function return for a list?",
+        "options": ["The last index", "The number of elements", "The first element", "The memory size"],
+        "answer": 1,
+        "explanation": "len() gives the number of elements currently in the list."
+      },
+      {
+        "question": "What will this code print?\n\nnumbers = [10, 20, 30]\nnumbers[1] = 50\nprint(numbers[1])",
+        "options": ["10", "20", "30", "50"],
+        "answer": 3,
+        "explanation": "Assigning to index 1 replaces the existing value 20 with 50."
+      },
+      {
+        "question": "What does numbers[1:3] return for numbers = [10, 20, 30, 40]?",
+        "options": ["[10, 20]", "[20, 30]", "[20, 30, 40]", "[30, 40]"],
+        "answer": 1,
+        "explanation": "Slicing [1:3] returns elements from index 1 up to, but not including, index 3."
+      },
+      {
+        "question": "Which method removes and returns the last element of a list by default?",
+        "options": ["remove()", "delete()", "pop()", "shift()"],
+        "answer": 2,
+        "explanation": "pop() removes and returns an element, defaulting to the last one if no index is given."
+      },
+      {
+        "question": "Which loop style directly visits each element of a list without an index?",
+        "options": ["for item in my_list:", "for i in my_list.length:", "while my_list:", "for i to my_list:"],
+        "answer": 0,
+        "explanation": "for item in my_list: iterates directly over the list's elements."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Inventory",
+      "scenario": "You are building the inventory system for a game. The player starts with several items and can collect a new item during gameplay.",
+      "instructions": [
+        "Create a list called inventory containing at least three items.",
+        "Use append() to add a new item to the inventory.",
+        "Use print() to display the inventory.",
+        "Use len() to display the number of items.",
+        "Access and display the first item using its list index.",
+        "Use a for loop to display each inventory item."
+      ],
+      "starterCode": "inventory = [\"Sword\", \"Shield\", \"Potion\"]\n\n# Add a new item\n\n# Display the inventory\n\n# Display the number of items\n\n# Display the first item\n\n# Loop through the inventory\n",
+      "expectedConcepts": [
+        "Lists",
+        "List indexing",
+        "append()",
+        "len()",
+        "for loop",
+        "print()"
+      ],
+      "evaluationCriteria": [
+        "Creates an inventory list with multiple items.",
+        "Adds an item using append().",
+        "Displays the inventory.",
+        "Uses len() to display the number of items.",
+        "Accesses the first item using index 0.",
+        "Loops through the list."
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "title": "Dictionaries",
+    "description": "Learn how to represent structured data using dictionaries, access and modify key-value pairs, and work with real-world entities in Python.",
+    "sections": [
+      {
+        "title": "What Are Dictionaries?",
+        "content": "Dictionaries are used to group related information together using key-value pairs. They are useful for representing real-world entities such as players, users, products, or orders.\n\nInstead of storing player information in separate variables, you can group the information into one dictionary."
+      },
+      {
+        "title": "Creating Dictionaries",
+        "content": "Dictionaries are created using curly braces {}. Each entry contains a key and a value separated by a colon, and entries are separated by commas.",
+        "examples": [
+          {
+            "title": "Creating a dictionary",
+            "code": "player = {\n    \"name\": \"Shadow\",\n    \"level\": 25,\n    \"health\": 100\n}",
+            "explanation": "The keys are \"name\", \"level\", and \"health\". Their corresponding values are \"Shadow\", 25, and 100."
+          }
+        ]
+      },
+      {
+        "title": "Accessing Values",
+        "content": "You can access a dictionary's value using square brackets with the key, or using the .get() method, which safely returns None (or a default) instead of raising an error if the key does not exist.",
+        "examples": [
+          {
+            "title": "Accessing values",
+            "code": "player = {\"name\": \"Shadow\", \"level\": 25}\n\nprint(player[\"name\"])\nprint(player.get(\"level\"))\nprint(player.get(\"mana\", 0))",
+            "explanation": "player[\"name\"] and player.get(\"level\") both retrieve values. get() returns a default of 0 for the missing \"mana\" key instead of raising an error."
+          }
+        ]
+      },
+      {
+        "title": "Adding and Modifying Entries",
+        "content": "You can add a new key-value pair to a dictionary or change an existing value using assignment with square brackets.",
+        "examples": [
+          {
+            "title": "Adding and modifying",
+            "code": "player = {\"name\": \"Shadow\", \"level\": 25}\n\nplayer[\"health\"] = 100\nplayer[\"level\"] = 26\n\nprint(player)",
+            "explanation": "A new \"health\" key is added, and the existing \"level\" value is updated."
+          }
+        ]
+      },
+      {
+        "title": "Removing Entries",
+        "content": "The del keyword or the .pop() method can remove a key from a dictionary. pop() also returns the removed value.",
+        "examples": [
+          {
+            "title": "Removing a key",
+            "code": "player = {\"name\": \"Shadow\", \"level\": 25, \"temp_bonus\": 50}\n\ndel player[\"temp_bonus\"]\n\nprint(player)",
+            "explanation": "The temp_bonus key is removed from the dictionary."
+          }
+        ]
+      },
+      {
+        "title": "Checking If a Key Exists",
+        "content": "The in keyword checks whether a key exists in a dictionary, which is a safe way to avoid errors before accessing a value directly.",
+        "examples": [
+          {
+            "title": "Checking for a key",
+            "code": "player = {\"name\": \"Shadow\", \"level\": 25}\n\nif \"level\" in player:\n    print(\"Level found\")",
+            "explanation": "The in keyword checks membership among the dictionary's keys."
+          }
+        ]
+      },
+      {
+        "title": "Looping Through Dictionaries",
+        "content": "You can loop through a dictionary's keys, values, or key-value pairs using .keys(), .values(), and .items().",
+        "examples": [
+          {
+            "title": "Looping with items()",
+            "code": "player = {\"name\": \"Shadow\", \"level\": 25}\n\nfor key, value in player.items():\n    print(key, value)",
+            "explanation": ".items() yields each key and its corresponding value as a pair during the loop."
+          }
+        ]
+      },
+      {
+        "title": "Nested Dictionaries",
+        "content": "A dictionary can contain another dictionary as a value. This is called a nested dictionary, and allows related information to be grouped into logical sections.",
+        "examples": [
+          {
+            "title": "A nested dictionary",
+            "code": "player = {\n    \"name\": \"Shadow\",\n    \"stats\": {\n        \"health\": 100,\n        \"attack\": 50\n    }\n}\n\nprint(player[\"stats\"][\"health\"])",
+            "explanation": "Accessing a nested value requires chaining the keys, one dictionary level at a time."
+          }
+        ]
+      },
+      {
+        "title": "Dictionaries in Real Applications",
+        "content": "Dictionaries are one of the most important structures in Python applications. A user profile, product, game character, or API response can all be represented using a dictionary, and JSON data from web APIs maps naturally onto Python dictionaries.",
+        "examples": [
+          {
+            "title": "A product dictionary",
+            "code": "product = {\n    \"name\": \"Gaming Mouse\",\n    \"price\": 2499,\n    \"in_stock\": True\n}\n\nprint(product[\"name\"])\nprint(product[\"price\"])",
+            "explanation": "Understanding dictionaries is essential before working with APIs, JSON data, and more advanced Python programs."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is a dictionary mainly used for?",
+        "options": ["Repeating code", "Grouping related data using key-value pairs", "Creating loops", "Storing only numbers"],
+        "answer": 1,
+        "explanation": "Dictionaries group related information using key-value pairs."
+      },
+      {
+        "question": "Which syntax correctly creates an empty dictionary?",
+        "options": ["player = []", "player = {}", "player = ()", "player = <>"],
+        "answer": 1,
+        "explanation": "Curly braces {} are used to create dictionary literals in Python."
+      },
+      {
+        "question": "How do you access the value for key \"name\" in a dictionary called player?",
+        "options": ["player.name", "player[\"name\"]", "player->name", "player::name"],
+        "answer": 1,
+        "explanation": "Square brackets with the key access a dictionary's value in Python."
+      },
+      {
+        "question": "What does player.get(\"mana\", 0) do if \"mana\" is not a key in player?",
+        "options": ["Raises an error", "Returns None always", "Returns 0", "Adds \"mana\" to the dictionary"],
+        "answer": 2,
+        "explanation": "get() returns the provided default value (0 here) when the key is missing, instead of raising an error."
+      },
+      {
+        "question": "Can the entries of a dictionary be modified after creation?",
+        "options": ["No, never", "Yes, keys and values can be added, changed, or removed", "Only numbers can be changed", "Only strings can be changed"],
+        "answer": 1,
+        "explanation": "Dictionaries are mutable, so their entries can be freely added, changed, or removed."
+      },
+      {
+        "question": "What does del player[\"health\"] do?",
+        "options": ["Sets health to zero", "Removes the health key", "Deletes the entire player dictionary", "Creates a new health key"],
+        "answer": 1,
+        "explanation": "del removes the specified key (and its value) from the dictionary."
+      },
+      {
+        "question": "What is a nested dictionary?",
+        "options": ["A dictionary inside another dictionary", "A dictionary without keys", "A list inside a loop", "A function inside a dictionary"],
+        "answer": 0,
+        "explanation": "A nested dictionary is a dictionary stored as a value inside another dictionary."
+      },
+      {
+        "question": "What does player.items() return when looping?",
+        "options": ["Only the keys", "Only the values", "Key-value pairs", "The length of the dictionary"],
+        "answer": 2,
+        "explanation": ".items() yields each key and value together as a pair, suitable for a for key, value in ... loop."
+      },
+      {
+        "question": "How do you check whether \"level\" is a key in the dictionary player?",
+        "options": ["\"level\" in player", "player.has(\"level\")", "player.contains(\"level\")", "level in player.keys[]"],
+        "answer": 0,
+        "explanation": "The in keyword checks whether a value exists among a dictionary's keys."
+      },
+      {
+        "question": "Which structure would best represent a single user with named fields like name, age, and email?",
+        "options": ["A list", "A dictionary", "A single string", "A single number"],
+        "answer": 1,
+        "explanation": "A dictionary is well suited to representing an entity with clearly named fields."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Profile",
+      "scenario": "You are building a player profile for a game. Store the player's basic information and display selected properties.",
+      "instructions": [
+        "Create a dictionary called player.",
+        "Add name, level, health, and is_online keys.",
+        "Use appropriate values for each key.",
+        "Display the player's name and level using dictionary access.",
+        "Change the player's level.",
+        "Add an inventory key containing a list of items.",
+        "Display one inventory item."
+      ],
+      "starterCode": "player = {\n    # Add player keys here\n}\n\n# Display player information\n\n# Update the player's level\n\n# Add an inventory\n",
+      "expectedConcepts": [
+        "Dictionaries",
+        "Key-value pairs",
+        "Dictionary access",
+        "Lists",
+        "Nested data",
+        "Value modification"
+      ],
+      "evaluationCriteria": [
+        "Creates a dictionary called player.",
+        "Includes name, level, health, and is_online keys.",
+        "Uses appropriate data types for the values.",
+        "Accesses values using dictionary key access.",
+        "Modifies the player's level.",
+        "Adds an inventory list.",
+        "Accesses an inventory item."
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "title": "Comprehensions & Built-in Functions",
+    "description": "Learn how to process and transform collections using list comprehensions and built-in functions such as map, filter, sorted, and sum.",
+    "sections": [
+      {
+        "title": "Why Comprehensions and Built-ins?",
+        "content": "Loops allow you to process lists, but Python also provides list comprehensions and built-in functions that make common operations more concise and expressive. These are widely used in modern Python, especially when working with data."
+      },
+      {
+        "title": "List Comprehensions",
+        "content": "A list comprehension creates a new list by transforming every element of an existing sequence, using a compact syntax: [expression for item in sequence].",
+        "examples": [
+          {
+            "title": "Doubling values",
+            "code": "scores = [10, 20, 30]\n\ndoubled = [score * 2 for score in scores]\n\nprint(doubled)",
+            "explanation": "The comprehension multiplies every score by 2, producing [20, 40, 60]."
+          }
+        ]
+      },
+      {
+        "title": "Conditional List Comprehensions",
+        "content": "A condition can be added to a list comprehension to select only certain elements, using the syntax [expression for item in sequence if condition].",
+        "examples": [
+          {
+            "title": "Filtering with a comprehension",
+            "code": "scores = [30, 55, 80, 40, 90]\n\npassing_scores = [score for score in scores if score >= 50]\n\nprint(passing_scores)",
+            "explanation": "The comprehension keeps only the scores that are 50 or higher, producing [55, 80, 90]."
+          }
+        ]
+      },
+      {
+        "title": "map() and filter()",
+        "content": "map() applies a function to every item in a sequence and returns a new iterable of the results. filter() keeps only the items for which a function returns True. Both are often used with lambda functions, and their result is usually wrapped in list() to see the values.",
+        "examples": [
+          {
+            "title": "Using map and filter",
+            "code": "scores = [30, 55, 80]\n\ndoubled = list(map(lambda score: score * 2, scores))\npassing = list(filter(lambda score: score >= 50, scores))\n\nprint(doubled)\nprint(passing)",
+            "explanation": "map() transforms every score, while filter() keeps only the scores that satisfy the condition."
+          }
+        ]
+      },
+      {
+        "title": "sorted()",
+        "content": "The sorted() function returns a new, sorted list from any sequence, without changing the original. It accepts an optional key function and a reverse flag.",
+        "examples": [
+          {
+            "title": "Sorting scores",
+            "code": "scores = [80, 30, 55]\n\nranked = sorted(scores, reverse=True)\n\nprint(ranked)",
+            "explanation": "sorted(scores, reverse=True) returns the scores from highest to lowest, as a new list."
+          }
+        ]
+      },
+      {
+        "title": "sum(), min(), and max()",
+        "content": "sum() adds up all the numeric values in a sequence. min() and max() return the smallest and largest values. These are common when summarizing numeric data.",
+        "examples": [
+          {
+            "title": "Summarizing scores",
+            "code": "scores = [80, 30, 55]\n\nprint(sum(scores))\nprint(min(scores))\nprint(max(scores))",
+            "explanation": "sum() returns the total of all scores, while min() and max() return the smallest and largest values."
+          }
+        ]
+      },
+      {
+        "title": "Combining Techniques",
+        "content": "Comprehensions and built-in functions can be combined to express multi-step data processing concisely, for example filtering then transforming in the same comprehension.",
+        "examples": [
+          {
+            "title": "Filter then transform",
+            "code": "scores = [40, 60, 80, 90]\n\nresult = [score * 2 for score in scores if score >= 50]\n\nprint(result)",
+            "explanation": "The comprehension first keeps scores of 50 or higher, then doubles each of them, in a single expression."
+          }
+        ]
+      },
+      {
+        "title": "Choosing the Right Tool",
+        "content": "In modern Python, list comprehensions are usually preferred over map()/filter() for readability, while sum(), min(), max(), and sorted() remain the standard tools for their specific purposes.\n\nA useful way to remember them:\n- Comprehension -> Transform and/or select\n- map() -> Transform (older style)\n- filter() -> Select (older style)\n- sorted() -> Order\n- sum()/min()/max() -> Summarize"
+      },
+      {
+        "title": "Real-World Usage",
+        "content": "These tools are heavily used when processing data from files, databases, and APIs. For example, an application might receive a list of product dictionaries and select only the available ones.",
+        "examples": [
+          {
+            "title": "Filtering available products",
+            "code": "products = [\n    {\"name\": \"Mouse\", \"available\": True},\n    {\"name\": \"Keyboard\", \"available\": False}\n]\n\navailable = [p for p in products if p[\"available\"]]\n\nprint(available)",
+            "explanation": "The comprehension keeps only the product dictionaries where \"available\" is True."
+          }
+        ]
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What does a list comprehension create?",
+        "options": ["A single value", "A new list", "A dictionary only", "Nothing, it just prints"],
+        "answer": 1,
+        "explanation": "A list comprehension produces a new list based on an existing sequence."
+      },
+      {
+        "question": "What does this comprehension produce?\n\n[n * 2 for n in [1, 2, 3]]",
+        "options": ["[1, 2, 3]", "[2, 4, 6]", "[3, 6, 9]", "6"],
+        "answer": 1,
+        "explanation": "Each number is multiplied by 2, producing [2, 4, 6]."
+      },
+      {
+        "question": "Which comprehension keeps only scores of 50 or higher from scores?",
+        "options": [
+          "[s for s in scores if s >= 50]",
+          "[s in scores if s >= 50]",
+          "[s for s >= 50 in scores]",
+          "[s if s >= 50]"
+        ],
+        "answer": 0,
+        "explanation": "The correct syntax is [expression for item in sequence if condition]."
+      },
+      {
+        "question": "What does map() return in Python 3?",
+        "options": ["A list directly", "A map object (an iterable of results)", "Always a number", "None"],
+        "answer": 1,
+        "explanation": "map() returns a map object, an iterable, which is often wrapped in list() to view the results."
+      },
+      {
+        "question": "What is filter() used for?",
+        "options": ["Transforming every value", "Selecting values that satisfy a condition", "Sorting a list", "Deleting a list"],
+        "answer": 1,
+        "explanation": "filter() keeps only the items for which the given function returns True."
+      },
+      {
+        "question": "What does sorted([80, 30, 55]) return?",
+        "options": ["[80, 30, 55]", "[30, 55, 80]", "[55, 30, 80]", "80"],
+        "answer": 1,
+        "explanation": "sorted() returns a new list in ascending order by default: [30, 55, 80]."
+      },
+      {
+        "question": "What does sum([10, 20, 30]) return?",
+        "options": ["10", "30", "60", "[10, 20, 30]"],
+        "answer": 2,
+        "explanation": "sum() adds all the numbers together: 10 + 20 + 30 = 60."
+      },
+      {
+        "question": "Which function returns the largest value in a sequence?",
+        "options": ["sum()", "sorted()", "max()", "len()"],
+        "answer": 2,
+        "explanation": "max() returns the largest value in the given sequence."
+      },
+      {
+        "question": "In modern Python, what is often preferred over map()/filter() for readability?",
+        "options": ["for loops with print only", "List comprehensions", "while loops", "Global variables"],
+        "answer": 1,
+        "explanation": "List comprehensions are generally considered more Pythonic and readable than chained map()/filter() calls."
+      },
+      {
+        "question": "What does this code produce?\n\n[s * 2 for s in [40, 60, 80] if s >= 50]",
+        "options": ["[40, 60, 80]", "[120, 160]", "[80, 120, 160]", "[60, 80]"],
+        "answer": 1,
+        "explanation": "Only 60 and 80 satisfy the condition, and each is doubled, producing [120, 160]."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Score Analyzer",
+      "scenario": "You are building a game statistics system. The system receives a list of player scores and needs to identify passing scores and calculate their doubled values.",
+      "instructions": [
+        "Create a list called scores containing at least five numeric scores.",
+        "Use a list comprehension (or filter()) to create a new list containing scores of 50 or higher.",
+        "Use a list comprehension (or map()) to create a new list that doubles the passing scores.",
+        "Use a for loop to display each doubled score.",
+        "Use sum() to calculate the total of the doubled scores.",
+        "Display the final total using print()."
+      ],
+      "starterCode": "scores = [40, 55, 70, 30, 90]\n\n# Filter passing scores\n\n# Double the passing scores\n\n# Display each result\n\n# Calculate the total\n",
+      "expectedConcepts": [
+        "Lists",
+        "List comprehensions",
+        "filter()",
+        "map()",
+        "sum()",
+        "for loop"
+      ],
+      "evaluationCriteria": [
+        "Creates a list containing numeric scores.",
+        "Selects scores of 50 or higher.",
+        "Doubles the passing scores.",
+        "Uses a loop to display the doubled scores.",
+        "Uses sum() to calculate the total.",
+        "Displays the calculated result."
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "title": "Object-Oriented Programming Basics",
+    "description": "Learn how to represent structured entities using classes and objects, define attributes and methods, and create multiple instances of a class.",
+    "sections": [
+      {
+        "title": "What Are Classes and Objects?",
+        "content": "A class is a blueprint for creating objects. An object is a specific instance created from a class, with its own data. Classes let you group related data and behavior (functions) together, which is useful for representing entities such as players, users, or products."
+      },
+      {
+        "title": "Defining a Class",
+        "content": "A class is created using the class keyword, followed by the class name (conventionally written in PascalCase) and a colon.",
+        "examples": [
+          {
+            "title": "A simple class",
+            "code": "class Player:\n    pass\n\nhero = Player()\nprint(hero)",
+            "explanation": "Player() creates a new object, called an instance, of the Player class."
+          }
+        ]
+      },
+      {
+        "title": "The __init__ Method",
+        "content": "The __init__ method is a special method that runs automatically when a new object is created. It is commonly used to set up the object's initial attributes.",
+        "examples": [
+          {
+            "title": "Using __init__",
+            "code": "class Player:\n    def __init__(self, name, level):\n        self.name = name\n        self.level = level\n\nhero = Player(\"Shadow\", 1)\nprint(hero.name)",
+            "explanation": "When Player(\"Shadow\", 1) is called, __init__ runs and stores \"Shadow\" and 1 as attributes on the new object."
+          }
+        ]
+      },
+      {
+        "title": "The self Parameter",
+        "content": "self refers to the specific instance the method is being called on. It is always the first parameter of an instance method, though Python passes it automatically when the method is called.",
+        "examples": [
+          {
+            "title": "self in a method",
+            "code": "class Player:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        print(\"Hello, \" + self.name)\n\nhero = Player(\"Shadow\")\nhero.greet()",
+            "explanation": "Inside greet(), self.name refers to the name attribute of whichever Player object called the method."
+          }
+        ]
+      },
+      {
+        "title": "Instance Attributes",
+        "content": "Instance attributes are variables that belong to a specific object. They are usually set inside __init__ using self.attribute_name = value, and each object can have its own independent values.",
+        "examples": [
+          {
+            "title": "Independent attributes",
+            "code": "class Player:\n    def __init__(self, name, health):\n        self.name = name\n        self.health = health\n\nplayer1 = Player(\"Shadow\", 100)\nplayer2 = Player(\"Nova\", 80)\n\nprint(player1.health)\nprint(player2.health)",
+            "explanation": "player1 and player2 each have their own health value, independent of one another."
+          }
+        ]
+      },
+      {
+        "title": "Methods",
+        "content": "A method is a function defined inside a class. Methods describe the behavior of objects and can read or change an object's attributes using self.",
+        "examples": [
+          {
+            "title": "A method that changes state",
+            "code": "class Player:\n    def __init__(self, name, health):\n        self.name = name\n        self.health = health\n\n    def take_damage(self, amount):\n        self.health = self.health - amount\n\nhero = Player(\"Shadow\", 100)\nhero.take_damage(25)\n\nprint(hero.health)",
+            "explanation": "take_damage() modifies the object's own health attribute using self."
+          }
+        ]
+      },
+      {
+        "title": "Creating Multiple Objects",
+        "content": "Once a class is defined, you can create as many objects (instances) from it as needed. Each object is independent, even though they share the same class blueprint.",
+        "examples": [
+          {
+            "title": "Multiple players",
+            "code": "players = [Player(\"Shadow\", 100), Player(\"Nova\", 90)]\n\nfor player in players:\n    print(player.name, player.health)",
+            "explanation": "A list can hold multiple objects created from the same class, and each retains its own attribute values."
+          }
+        ]
+      },
+      {
+        "title": "Class Attributes vs Instance Attributes",
+        "content": "An attribute defined directly inside the class body (not inside a method) is a class attribute, shared by all instances unless overridden. Instance attributes, set with self. inside __init__, belong to each object individually.",
+        "examples": [
+          {
+            "title": "A shared class attribute",
+            "code": "class Player:\n    game_name = \"Arena Legends\"\n\n    def __init__(self, name):\n        self.name = name\n\nhero = Player(\"Shadow\")\nprint(hero.game_name)",
+            "explanation": "game_name is shared by every Player object because it belongs to the class itself, not to any single instance."
+          }
+        ]
+      },
+      {
+        "title": "OOP in Real Applications",
+        "content": "Classes are a foundational tool for organizing larger Python programs. They are used to represent users, orders, game characters, bank accounts, and countless other real-world entities in a structured, reusable way."
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is a class?",
+        "options": ["A single value", "A blueprint for creating objects", "A type of loop", "A built-in function"],
+        "answer": 1,
+        "explanation": "A class defines the structure and behavior that its objects (instances) will have."
+      },
+      {
+        "question": "Which keyword defines a new class?",
+        "options": ["def", "class", "object", "new"],
+        "answer": 1,
+        "explanation": "The class keyword is used to define a new class in Python."
+      },
+      {
+        "question": "When does the __init__ method run?",
+        "options": ["Never automatically", "Every time a method is called", "Automatically when a new object is created", "Only when the program ends"],
+        "answer": 2,
+        "explanation": "__init__ runs automatically as soon as a new object is created from the class."
+      },
+      {
+        "question": "What does self refer to inside a method?",
+        "options": ["The class itself", "The specific object the method was called on", "A global variable", "The __init__ method"],
+        "answer": 1,
+        "explanation": "self refers to the particular instance that the method is operating on."
+      },
+      {
+        "question": "How do you create a new instance of a class called Player?",
+        "options": ["new Player()", "Player.new()", "Player()", "create Player()"],
+        "answer": 2,
+        "explanation": "Calling the class name with parentheses, like Player(), creates a new instance."
+      },
+      {
+        "question": "What is an instance attribute?",
+        "options": [
+          "A function shared by all classes",
+          "A variable that belongs to a specific object",
+          "A loop inside a class",
+          "A value that never changes"
+        ],
+        "answer": 1,
+        "explanation": "Instance attributes belong to a specific object, usually set with self.attribute in __init__."
+      },
+      {
+        "question": "What is a method?",
+        "options": ["A variable declared with let", "A function defined inside a class", "A special kind of list", "A type of loop"],
+        "answer": 1,
+        "explanation": "A method is a function defined within a class, describing behavior for its objects."
+      },
+      {
+        "question": "If player1 and player2 are both Player objects, are their instance attributes independent?",
+        "options": ["No, they always share the same values", "Yes, each object keeps its own attribute values", "Only numbers are independent", "Only strings are independent"],
+        "answer": 1,
+        "explanation": "Each instance has its own separate copy of instance attributes."
+      },
+      {
+        "question": "Where is a class attribute typically defined?",
+        "options": ["Inside a method only", "Directly inside the class body, outside any method", "Inside a list", "Inside __init__ using a local variable"],
+        "answer": 1,
+        "explanation": "A class attribute is defined directly in the class body and is shared across instances unless overridden."
+      },
+      {
+        "question": "Why are classes useful in real applications?",
+        "options": [
+          "They remove the need for variables",
+          "They let you group related data and behavior to represent real-world entities",
+          "They prevent all errors",
+          "They only work with numbers"
+        ],
+        "answer": 1,
+        "explanation": "Classes organize related data and behavior together, making programs easier to structure and reuse."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Player Class",
+      "scenario": "You are building the character system for a game. Create a Player class that stores a player's information and can take damage.",
+      "instructions": [
+        "Create a class called Player.",
+        "Define an __init__ method that accepts name and health.",
+        "Store name and health as instance attributes using self.",
+        "Add a method called take_damage that accepts an amount and reduces self.health.",
+        "Create at least one Player object.",
+        "Call take_damage on the object and print the resulting health.",
+        "Use print() to display the player's name and final health."
+      ],
+      "starterCode": "class Player:\n    def __init__(self, name, health):\n        # Store the attributes here\n        pass\n\n    def take_damage(self, amount):\n        # Reduce health here\n        pass\n\n# Create a player and test take_damage here\n",
+      "expectedConcepts": [
+        "class",
+        "__init__",
+        "self",
+        "instance attributes",
+        "methods",
+        "object creation"
+      ],
+      "evaluationCriteria": [
+        "Defines a class named Player.",
+        "Defines an __init__ method with name and health parameters.",
+        "Stores name and health as self attributes.",
+        "Defines a take_damage method that modifies self.health.",
+        "Creates at least one Player instance.",
+        "Calls take_damage on the instance.",
+        "Prints the player's information."
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "title": "File Handling",
+    "description": "Learn how to read from and write to files using Python's built-in file handling tools, including the with statement.",
+    "sections": [
+      {
+        "title": "Why File Handling?",
+        "content": "Programs often need to store information beyond the lifetime of a single run, such as saving game progress, logging events, or reading configuration data. File handling allows a Python program to read from and write to files on disk."
+      },
+      {
+        "title": "Opening Files",
+        "content": "The built-in open() function opens a file and returns a file object. It accepts a file path and a mode, such as \"r\" for reading, \"w\" for writing (which overwrites the file), and \"a\" for appending.",
+        "examples": [
+          {
+            "title": "Opening a file for reading",
+            "code": "file = open(\"scores.txt\", \"r\")\ncontent = file.read()\nfile.close()\n\nprint(content)",
+            "explanation": "open() returns a file object, and .read() retrieves its entire contents as a string. .close() releases the file when done."
+          }
+        ]
+      },
+      {
+        "title": "The with Statement",
+        "content": "The with statement is the recommended way to work with files. It automatically closes the file when the block finishes, even if an error occurs, so you do not need to call close() manually.",
+        "examples": [
+          {
+            "title": "Using with to read a file",
+            "code": "with open(\"scores.txt\", \"r\") as file:\n    content = file.read()\n\nprint(content)",
+            "explanation": "The file is automatically closed once the indented with block finishes running."
+          }
+        ]
+      },
+      {
+        "title": "Reading Files Line by Line",
+        "content": "A file object can be looped over directly to read it one line at a time, or you can use .readlines() to get a list of all lines.",
+        "examples": [
+          {
+            "title": "Reading line by line",
+            "code": "with open(\"players.txt\", \"r\") as file:\n    for line in file:\n        print(line.strip())",
+            "explanation": "Looping over the file object yields each line, and .strip() removes the trailing newline character."
+          }
+        ]
+      },
+      {
+        "title": "Writing to Files",
+        "content": "Opening a file in \"w\" mode and calling .write() writes text to the file. Using \"w\" mode will overwrite the file's existing content, so it should be used carefully.",
+        "examples": [
+          {
+            "title": "Writing to a file",
+            "code": "with open(\"scores.txt\", \"w\") as file:\n    file.write(\"Shadow: 100\\n\")\n    file.write(\"Nova: 90\\n\")",
+            "explanation": "Each call to .write() adds text to the file; \\n creates a new line."
+          }
+        ]
+      },
+      {
+        "title": "Appending to Files",
+        "content": "Opening a file in \"a\" mode adds new content to the end of the file without erasing what is already there, which is useful for logs or ongoing records.",
+        "examples": [
+          {
+            "title": "Appending a new record",
+            "code": "with open(\"scores.txt\", \"a\") as file:\n    file.write(\"Rex: 75\\n\")",
+            "explanation": "\"a\" mode adds this new line after the file's existing content instead of replacing it."
+          }
+        ]
+      },
+      {
+        "title": "Working with File Paths",
+        "content": "A file path can be relative (based on the current working directory) or absolute. When a file does not exist and is opened in read mode, Python raises a FileNotFoundError, which can be handled with try/except (covered in the next chapter)."
+      },
+      {
+        "title": "File Handling in Real Applications",
+        "content": "File handling is used throughout real applications: saving user settings, exporting reports, processing CSV or log data, and reading configuration files are all common, practical uses of the techniques in this chapter."
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "Which function opens a file in Python?",
+        "options": ["file()", "open()", "read()", "load()"],
+        "answer": 1,
+        "explanation": "open() is the built-in function used to open a file and get a file object."
+      },
+      {
+        "question": "Which mode opens a file for reading?",
+        "options": ["\"r\"", "\"w\"", "\"a\"", "\"x\""],
+        "answer": 0,
+        "explanation": "\"r\" is the mode used to open a file for reading."
+      },
+      {
+        "question": "What is the main benefit of using the with statement when working with files?",
+        "options": [
+          "It makes the code run faster",
+          "It automatically closes the file when the block finishes",
+          "It prevents the file from being read",
+          "It converts the file to a dictionary"
+        ],
+        "answer": 1,
+        "explanation": "The with statement ensures the file is automatically closed, even if an error occurs inside the block."
+      },
+      {
+        "question": "What does file.read() return?",
+        "options": ["A list of lines", "The entire file content as a string", "The file's name", "Nothing"],
+        "answer": 1,
+        "explanation": "read() reads and returns the whole contents of the file as a single string."
+      },
+      {
+        "question": "What happens when a file is opened in \"w\" mode?",
+        "options": [
+          "New content is added to the end of the file",
+          "The file's existing content is overwritten",
+          "The file can only be read",
+          "The file is deleted permanently"
+        ],
+        "answer": 1,
+        "explanation": "\"w\" mode overwrites the file's existing content when writing begins."
+      },
+      {
+        "question": "Which mode adds content to the end of a file without erasing what is already there?",
+        "options": ["\"r\"", "\"w\"", "\"a\"", "\"d\""],
+        "answer": 2,
+        "explanation": "\"a\" (append) mode adds new content after the existing content in the file."
+      },
+      {
+        "question": "What does looping directly over a file object give you?",
+        "options": ["Each character", "Each line of the file", "The file's size", "Nothing, it raises an error"],
+        "answer": 1,
+        "explanation": "Iterating over a file object yields the file one line at a time."
+      },
+      {
+        "question": "What does .strip() commonly remove when reading lines from a file?",
+        "options": ["All spaces in the middle of the text", "The trailing newline character", "The first character", "Numbers only"],
+        "answer": 1,
+        "explanation": ".strip() removes leading and trailing whitespace, including the newline character at the end of a line."
+      },
+      {
+        "question": "What error commonly occurs when opening a file that does not exist in read mode?",
+        "options": ["TypeError", "FileNotFoundError", "ValueError", "IndexError"],
+        "answer": 1,
+        "explanation": "Python raises a FileNotFoundError when a file to be read does not exist at the given path."
+      },
+      {
+        "question": "Which task is a common real-world use of file handling?",
+        "options": ["Declaring a variable", "Saving user settings to disk", "Comparing two numbers", "Defining a class"],
+        "answer": 1,
+        "explanation": "Saving and loading data such as user settings is a typical practical use of file handling."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Score Logger",
+      "scenario": "You are building a simple system that saves player scores to a file and then reads them back.",
+      "instructions": [
+        "Open a file called scores.txt in write mode using the with statement.",
+        "Write at least two player scores to the file, one per line.",
+        "Open the file again in read mode using the with statement.",
+        "Read the file's contents and store them in a variable.",
+        "Use print() to display the contents that were read.",
+        "Loop through the file's lines and print each one individually."
+      ],
+      "starterCode": "# Write scores to the file here\n\n\n# Read the scores back here\n",
+      "expectedConcepts": [
+        "open()",
+        "with statement",
+        "write()",
+        "read()",
+        "file modes",
+        "looping over a file"
+      ],
+      "evaluationCriteria": [
+        "Opens scores.txt in write mode using with.",
+        "Writes at least two lines to the file.",
+        "Opens the file again in read mode using with.",
+        "Reads the file's contents into a variable.",
+        "Displays the file's contents using print().",
+        "Loops through the file's lines."
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "title": "Error Handling & Debugging",
+    "description": "Learn how to understand Python exceptions, handle failures safely with try/except, raise your own errors, and debug programs.",
+    "sections": [
+      {
+        "title": "What Are Exceptions?",
+        "content": "Exceptions are errors that occur while a Python program is running. They can happen because of invalid input, missing files, incorrect operations, or many other situations. When an exception is not handled, the program stops and Python prints a traceback."
+      },
+      {
+        "title": "Common Exception Types",
+        "content": "Python has several built-in exception types for common situations: ValueError (an invalid value, such as converting \"abc\" to a number), TypeError (an operation used on the wrong type), KeyError (a missing dictionary key), IndexError (a list index that is out of range), and ZeroDivisionError (dividing by zero).",
+        "examples": [
+          {
+            "title": "A ZeroDivisionError",
+            "code": "score = 100\nresult = score / 0",
+            "explanation": "Dividing any number by 0 raises a ZeroDivisionError in Python."
+          },
+          {
+            "title": "A KeyError",
+            "code": "player = {\"name\": \"Shadow\"}\nprint(player[\"level\"])",
+            "explanation": "Accessing a key that does not exist in a dictionary using square brackets raises a KeyError."
+          }
+        ]
+      },
+      {
+        "title": "try and except",
+        "content": "The try...except statement allows Python to handle errors without immediately stopping the program. Code that might fail is placed inside try, and the code to run if an error occurs is placed inside except.",
+        "examples": [
+          {
+            "title": "Handling an error",
+            "code": "try:\n    result = risky_operation()\n    print(result)\nexcept Exception as error:\n    print(\"Something went wrong\")",
+            "explanation": "If an error occurs inside try, execution moves immediately to the except block instead of crashing the program."
+          }
+        ]
+      },
+      {
+        "title": "Catching Specific Exceptions",
+        "content": "It is best practice to catch specific exception types rather than catching every possible error the same way, because this makes it clear what kind of problem is expected and handled.",
+        "examples": [
+          {
+            "title": "Catching a specific exception",
+            "code": "try:\n    value = int(\"abc\")\nexcept ValueError:\n    print(\"That is not a valid number\")",
+            "explanation": "Catching ValueError specifically handles the expected failure of converting invalid text to a number."
+          }
+        ]
+      },
+      {
+        "title": "The Exception Object",
+        "content": "The value captured by except often contains information about the error. The str() of an exception, or its .args attribute, commonly describes what went wrong.",
+        "examples": [
+          {
+            "title": "Reading the error message",
+            "code": "try:\n    raise ValueError(\"Player not found\")\nexcept ValueError as error:\n    print(str(error))",
+            "explanation": "str(error) converts the exception into its readable message, \"Player not found\"."
+          }
+        ]
+      },
+      {
+        "title": "raise",
+        "content": "The raise statement allows a program to create and trigger an exception intentionally, which is useful for signaling invalid situations inside your own functions.",
+        "examples": [
+          {
+            "title": "Raising an exception",
+            "code": "def check_health(health):\n    if health < 0:\n        raise ValueError(\"Health cannot be negative\")",
+            "explanation": "raise allows a function to signal that an invalid argument or state has occurred."
+          }
+        ]
+      },
+      {
+        "title": "else and finally",
+        "content": "A try statement can also include an else block, which runs only if no exception occurred, and a finally block, which always runs whether or not an exception occurred — useful for cleanup such as closing a resource.",
+        "examples": [
+          {
+            "title": "Using finally",
+            "code": "try:\n    value = 10 / 2\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")\nfinally:\n    print(\"Operation complete\")",
+            "explanation": "\"Operation complete\" prints whether or not an exception occurred, because finally always runs."
+          }
+        ]
+      },
+      {
+        "title": "Debugging Techniques",
+        "content": "Debugging means finding and fixing problems in a program. Useful techniques include reading the full traceback carefully, using print() to inspect variable values, checking assumptions about data, and testing small pieces of code in isolation."
+      },
+      {
+        "title": "Error Handling in Real Applications",
+        "content": "Professional Python developers constantly handle errors: validating user input, working with unreliable network requests, and processing files that might not exist. Understanding exceptions and handling them deliberately makes programs more reliable."
+      }
+    ],
+    "mcqTest": [
+      {
+        "question": "What is an exception in Python?",
+        "options": ["A type of loop", "An error that occurs while a program is running", "A kind of function", "A built-in data type"],
+        "answer": 1,
+        "explanation": "An exception is an error that occurs during program execution, which can interrupt normal flow if not handled."
+      },
+      {
+        "question": "Which exception occurs when dividing a number by zero?",
+        "options": ["ValueError", "TypeError", "ZeroDivisionError", "KeyError"],
+        "answer": 2,
+        "explanation": "Dividing by zero raises a ZeroDivisionError in Python."
+      },
+      {
+        "question": "Which exception commonly occurs when accessing a missing dictionary key with square brackets?",
+        "options": ["KeyError", "IndexError", "ValueError", "NameError"],
+        "answer": 0,
+        "explanation": "Accessing a nonexistent key using square brackets raises a KeyError."
+      },
+      {
+        "question": "Which statement is used to handle exceptions safely?",
+        "options": ["try...except", "if...else only", "for...in", "switch...case"],
+        "answer": 0,
+        "explanation": "try...except is used to catch and handle exceptions without crashing the program."
+      },
+      {
+        "question": "Where does execution go when an error occurs inside a try block?",
+        "options": ["The matching except block", "The next line after the program", "A new file", "The finally block only"],
+        "answer": 0,
+        "explanation": "When an exception is raised inside try, control transfers to a matching except block."
+      },
+      {
+        "question": "Which keyword intentionally raises an exception?",
+        "options": ["error", "raise", "fail", "throwError"],
+        "answer": 1,
+        "explanation": "The raise statement is used to trigger an exception intentionally."
+      },
+      {
+        "question": "When does the finally block run?",
+        "options": [
+          "Only when an exception occurs",
+          "Only when no exception occurs",
+          "Always, whether or not an exception occurred",
+          "Never"
+        ],
+        "answer": 2,
+        "explanation": "The finally block always runs, making it useful for cleanup code."
+      },
+      {
+        "question": "Which exception occurs when converting the text \"abc\" to an integer with int(\"abc\")?",
+        "options": ["TypeError", "ValueError", "KeyError", "IndexError"],
+        "answer": 1,
+        "explanation": "int(\"abc\") raises a ValueError because the text is not a valid number."
+      },
+      {
+        "question": "Why is it generally better to catch specific exception types instead of a bare except?",
+        "options": [
+          "It makes the code slower",
+          "It clearly communicates which errors are expected and handled",
+          "It prevents all exceptions from ever occurring",
+          "Specific exceptions cannot be caught otherwise"
+        ],
+        "answer": 1,
+        "explanation": "Catching specific exception types makes error handling intentions clear and avoids accidentally hiding unrelated bugs."
+      },
+      {
+        "question": "Which technique is useful for debugging a Python program?",
+        "options": ["print() to inspect variable values", "Deleting the entire program", "Ignoring the traceback", "Removing all functions"],
+        "answer": 0,
+        "explanation": "Using print() to inspect values at different points is a simple and common debugging technique."
+      }
+    ],
+    "codingChallenge": {
+      "title": "Build a Safe Player Health Checker",
+      "scenario": "A game should reject invalid player health values instead of continuing silently. Create a function that raises an error for invalid health and handles it safely.",
+      "instructions": [
+        "Create a function called check_health that accepts health as a parameter.",
+        "Use an if statement to check whether health is less than 0.",
+        "Raise a ValueError with the message \"Invalid health\" when health is negative.",
+        "Use try...except to call the function safely.",
+        "Display the error message using print().",
+        "Test the function with a negative health value."
+      ],
+      "starterCode": "def check_health(health):\n    # Validate health here\n    pass\n\ntry:\n    # Call check_health here\n    pass\nexcept ValueError as error:\n    # Handle the error here\n    pass",
+      "expectedConcepts": [
+        "Function definition",
+        "if statement",
+        "raise",
+        "ValueError",
+        "try",
+        "except",
+        "Error message"
+      ],
+      "evaluationCriteria": [
+        "Defines check_health.",
+        "Accepts health as a parameter.",
+        "Checks whether health is less than 0.",
+        "Raises a ValueError.",
+        "Uses the message \"Invalid health\".",
+        "Uses try...except.",
+        "Calls check_health with a negative value.",
+        "Displays the error message."
+      ]
+    }
+  }
+]

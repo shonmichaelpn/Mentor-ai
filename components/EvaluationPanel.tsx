@@ -1,4 +1,4 @@
-interface Evaluation {
+export interface Evaluation {
   passed: boolean;
   score: number;
   summary: string;

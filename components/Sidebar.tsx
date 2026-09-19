@@ -50,10 +50,12 @@ export default function Sidebar({
 
         <div className="space-y-1">
           {chapters.map((chapter, index) => {
+            const previousChapter = chapters[index - 1];
             const unlocked =
-              index === 0 || completedChapters.includes(index - 1);
+              process.env.NODE_ENV === "development" ||
+              index === 0 || completedChapters.includes(previousChapter?.id);
 
-            const completed = completedChapters.includes(index);
+            const completed = completedChapters.includes(chapter.id);
             const active = currentChapter === index;
 
             return (
