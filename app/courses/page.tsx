@@ -31,20 +31,22 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
-      <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
+    <main className="min-h-screen bg-background text-foreground">
+      <header className="sticky top-0 z-10 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <div className="text-lg font-semibold tracking-tight">Mentor AI</div>
+          <div className="font-display text-lg font-medium tracking-tight">
+            Mentor AI
+          </div>
 
           <div className="flex items-center gap-5">
-            <div className="hidden text-sm text-zinc-500 sm:block">
+            <div className="hidden text-sm text-muted sm:block">
               Interactive Learning Platform
             </div>
 
             <button
               type="button"
               onClick={handleLogout}
-              className="rounded-lg border border-zinc-700 px-3 py-2 text-sm font-medium text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-900 hover:text-white"
+              className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-muted transition hover:border-accent hover:text-foreground"
             >
               Log out
             </button>
@@ -54,15 +56,16 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 pb-20 pt-20">
         <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-medium uppercase tracking-wider text-emerald-400">
+          <div className="mb-5 inline-flex items-center gap-2 font-mono text-xs text-muted">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             Learn by building
-          </p>
+          </div>
 
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="font-display text-4xl font-medium tracking-tight sm:text-5xl">
             Welcome to Mentor AI
           </h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-400">
+          <p className="mt-6 max-w-2xl text-base leading-8 text-muted">
             Learn programming through lessons, knowledge tests, coding
             challenges, and AI-powered feedback. Choose a learning path and
             start building your skills step by step.
@@ -71,8 +74,10 @@ export default function Home() {
 
         <div className="mt-16">
           <div className="mb-6">
-            <h2 className="text-2xl font-semibold">Choose your learning path</h2>
-            <p className="mt-2 text-sm text-zinc-500">
+            <h2 className="font-display text-2xl font-medium">
+              Choose your learning path
+            </h2>
+            <p className="mt-2 text-sm text-muted">
               Select a course to begin your learning journey.
             </p>
           </div>
@@ -81,40 +86,58 @@ export default function Home() {
             {courses.map((course) => (
               <article
                 key={course.id}
-                className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-7 transition hover:border-zinc-700 hover:bg-zinc-900"
+                className="group rounded-2xl border border-border bg-surface p-7 transition hover:border-accent/40"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-                      Learning Path
+                    <p className="font-mono text-xs text-muted">
+                      Learning path
                     </p>
 
-                    <h3 className="mt-2 text-2xl font-semibold">
+                    <h3 className="mt-2 font-display text-2xl font-medium">
                       {course.title}
                     </h3>
                   </div>
 
-                  <div className="rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-center">
-                    <div className="text-lg font-semibold">{course.chapters}</div>
-                    <div className="text-[10px] uppercase tracking-wide text-zinc-500">
-                      Chapters
+                  <div className="rounded-lg border border-border bg-background px-3 py-2 text-center">
+                    <div className="font-display text-lg font-medium">
+                      {course.chapters}
+                    </div>
+                    <div className="font-mono text-[10px] text-muted">
+                      chapters
                     </div>
                   </div>
                 </div>
 
-                <p className="mt-5 text-sm leading-7 text-zinc-400">
+                <p className="mt-5 text-sm leading-7 text-muted">
                   {course.description}
                 </p>
 
-                <p className="mt-5 text-xs leading-6 text-zinc-500">
-                  {course.topics}
-                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {course.topics.split(" · ").map((topic) => (
+                    <span
+                      key={topic}
+                      className="rounded border border-border bg-background px-2 py-1 font-mono text-[11px] text-muted"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                </div>
 
                 <button
                   onClick={() => router.push(`/learn/${course.id}`)}
-                  className="mt-7 w-full rounded-lg bg-white px-5 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
+                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition hover:opacity-90"
                 >
-                  Start Learning →
+                  Start Learning
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
                 </button>
               </article>
             ))}
