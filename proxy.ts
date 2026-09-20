@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const publicRoutes = new Set(["/", "/login", "/register"]);
+const publicRoutes = new Set(["/", "/login", "/register", "/register/otp"]);
 
 export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
