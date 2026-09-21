@@ -340,7 +340,7 @@ export default function Home() {
       : 0;
 
   return (
-    <div className="flex min-h-screen flex-col overflow-hidden bg-zinc-950 text-white lg:h-screen lg:flex-row">
+    <div className="flex h-dvh flex-col overflow-hidden bg-zinc-950 text-white lg:flex-row">
       {sidebarOpen && (
         <button
           type="button"
