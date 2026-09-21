@@ -12,14 +12,20 @@ import EvaluationPanel, { type Evaluation } from "@/components/EvaluationPanel";
 import { Chapter } from "@/types/chapter";
 import { runJavaScript } from "@/lib/codeRunner";
 import MCQTest from "@/components/MCQTest";
+import { getLatestUnlockedChapterIndex } from "@/lib/courseProgress";
 import { validateChallenge } from "@/lib/challengeValidator";
 
 export default function Home() {
   const router = useRouter();
-  const [currentChapter, setCurrentChapter] = useState(0);
+  const chapterData = javascriptChapters as Chapter[];
+
   const [completedChapters, setCompletedChapters] = useState<number[]>([]);
+  const [currentChapter, setCurrentChapter] = useState(() => {
+    const initialIndex = 0;
+    return initialIndex;
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
- 
+
   useEffect(() => {
     const loadProgress = async () => {
       try {
@@ -36,8 +42,16 @@ export default function Home() {
         }
 
         const data = await response.json();
+        const nextCompleted = data.completedChapters || [];
 
-        setCompletedChapters(data.completedChapters || []);
+        setCompletedChapters(nextCompleted);
+
+        const latestUnlockedChapter = getLatestUnlockedChapterIndex(
+          chapterData,
+          nextCompleted
+        );
+
+        setCurrentChapter(latestUnlockedChapter);
       } catch (error) {
         console.error("Failed to load progress:", error);
       }
@@ -48,8 +62,6 @@ export default function Home() {
 
   const [testPassed, setTestPassed] = useState(false);
   const [codingPassed, setCodingPassed] = useState(false);
-
-  const chapterData = javascriptChapters as Chapter[];
 
   const [userCode, setUserCode] = useState(
     chapterData[0].codingChallenge.starterCode
