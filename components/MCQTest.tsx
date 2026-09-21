@@ -189,16 +189,16 @@ export default function MCQTest({
    */
   if (!questions || questions.length === 0) {
     return (
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8">
-        <div className="text-sm font-medium text-amber-400">
+      <div className="rounded-2xl border border-border bg-surface p-8">
+        <div className="text-sm font-medium text-accent">
           Knowledge Test
         </div>
 
-        <h2 className="mt-2 text-xl font-semibold text-white">
+        <h2 className="mt-2 font-display text-xl font-medium text-foreground">
           Test unavailable
         </h2>
 
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm text-muted">
           No questions are available for this chapter yet.
         </p>
       </div>
@@ -209,16 +209,16 @@ export default function MCQTest({
 
   if (!isOpen) {
     return (
-      <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8">
-        <div className="text-sm font-medium text-blue-400">
+      <div className="rounded-2xl border border-border bg-surface p-8">
+        <div className="text-sm font-medium text-accent">
           Knowledge Test
         </div>
 
-        <h2 className="mt-2 text-2xl font-semibold text-white">
+        <h2 className="mt-2 font-display text-2xl font-medium text-foreground">
           Test your understanding
         </h2>
 
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-400">
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
           Answer 10 questions to test your understanding of this
           chapter. You have 15 seconds for each question and need
           at least 7 correct answers to pass.
@@ -226,7 +226,7 @@ export default function MCQTest({
 
         <button
           onClick={startTest}
-          className="mt-6 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
+          className="mt-6 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90"
         >
           Start Test
         </button>
@@ -236,16 +236,16 @@ export default function MCQTest({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6 backdrop-blur-sm">
-      <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl">
+      <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-zinc-800 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-border px-6 py-4">
           <div>
-            <div className="text-sm font-medium text-blue-400">
+            <div className="text-sm font-medium text-accent">
               Knowledge Test
             </div>
 
             {!finished && (
-              <div className="mt-1 text-xs text-zinc-500">
+              <div className="mt-1 text-xs text-muted">
                 Question {currentQuestion + 1} of {questions.length}
               </div>
             )}
@@ -253,7 +253,7 @@ export default function MCQTest({
 
           <button
             onClick={resetTest}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition hover:bg-zinc-800 hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted transition hover:bg-surface hover:text-foreground"
             aria-label="Close test"
           >
             ✕
@@ -267,7 +267,7 @@ export default function MCQTest({
               className={`text-sm font-medium ${
                 score >= passingScore
                   ? "text-emerald-400"
-                  : "text-amber-400"
+                  : "text-accent"
               }`}
             >
               {score >= passingScore
@@ -275,16 +275,16 @@ export default function MCQTest({
                 : "Keep Practicing"}
             </div>
 
-            <h2 className="mt-2 text-3xl font-bold text-white">
+            <h2 className="mt-2 font-display text-3xl font-medium text-foreground">
               {score}/{questions.length}
             </h2>
 
-            <p className="mt-2 text-sm text-zinc-500">
+            <p className="mt-2 text-sm text-muted">
               You scored{" "}
               {Math.round((score / questions.length) * 100)}%.
             </p>
 
-            <p className="mt-5 text-sm text-zinc-400">
+            <p className="mt-5 text-sm text-muted">
               You need {passingScore} out of {questions.length}{" "}
               correct answers to pass.
             </p>
@@ -292,7 +292,7 @@ export default function MCQTest({
             <div className="mt-8 flex justify-center gap-3">
               <button
                 onClick={startTest}
-                className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200"
+                className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition hover:opacity-90"
               >
                 Retake Test
               </button>
@@ -303,7 +303,7 @@ export default function MCQTest({
                     setIsOpen(false)
                     onContinue?.();
                   }}
-                  className="rounded-lg border border-zinc-700 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-800"
+                  className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted transition hover:border-accent hover:text-foreground"
                 >
                   Continue →
                 </button>
@@ -316,7 +316,7 @@ export default function MCQTest({
             {/* Timer */}
             <div className="mb-8">
               <div className="mb-2 flex items-center justify-between text-xs">
-                <span className="text-zinc-500">
+                <span className="text-muted">
                   Time remaining
                 </span>
 
@@ -324,19 +324,19 @@ export default function MCQTest({
                   className={`font-semibold ${
                     timeLeft <= 5
                       ? "text-red-400"
-                      : "text-zinc-300"
+                      : "text-foreground"
                   }`}
                 >
                   {timeLeft}s
                 </span>
               </div>
 
-              <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-1.5 overflow-hidden rounded-full bg-surface-2">
                 <div
                   className={`h-full transition-all duration-1000 ${
                     timeLeft <= 5
                       ? "bg-red-500"
-                      : "bg-blue-500"
+                      : "bg-accent"
                   }`}
                   style={{
                     width: `${(timeLeft / 15) * 100}%`,
@@ -346,7 +346,7 @@ export default function MCQTest({
             </div>
 
             {/* Question */}
-            <h2 className="text-xl font-semibold leading-8 text-white">
+            <h2 className="font-display text-xl font-medium leading-8 text-foreground">
               {question.question}
             </h2>
 
@@ -357,7 +357,7 @@ export default function MCQTest({
                 const isCorrect = index === question.answer;
 
                 let optionClass =
-                  "border-zinc-800 bg-zinc-900 hover:border-zinc-700";
+                  "border-border bg-surface hover:border-accent/40";
 
                 if (selectedAnswer !== null) {
                   if (isCorrect) {
@@ -368,7 +368,7 @@ export default function MCQTest({
                       "border-red-500/50 bg-red-500/10";
                   } else {
                     optionClass =
-                      "border-zinc-800 bg-zinc-900 opacity-50";
+                      "border-border bg-surface opacity-50";
                   }
                 }
 
@@ -379,11 +379,11 @@ export default function MCQTest({
                     disabled={selectedAnswer !== null}
                     className={`flex w-full items-center gap-4 rounded-xl border p-4 text-left transition ${optionClass}`}
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-zinc-800 text-sm font-medium text-zinc-300">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm font-medium text-muted">
                       {String.fromCharCode(65 + index)}
                     </span>
 
-                    <span className="text-sm leading-6 text-zinc-300">
+                    <span className="text-sm leading-6 text-foreground">
                       {option}
                     </span>
                   </button>

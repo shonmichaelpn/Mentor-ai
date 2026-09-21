@@ -18,15 +18,15 @@ export default function Terminal({
   onExplainError,
 }: TerminalProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-zinc-800 bg-black">
+    <div className="overflow-hidden rounded-xl border border-border bg-background">
       {/* Header */}
-      <div className="flex h-12 items-center justify-between border-b border-zinc-800 px-5">
-        <span className="text-xs font-medium tracking-wider text-zinc-500">
-          OUTPUT
+      <div className="flex h-12 items-center justify-between border-b border-border px-5">
+        <span className="font-mono text-xs text-muted">
+          output
         </span>
 
         {isRunning && (
-          <span className="text-xs text-yellow-400">
+          <span className="text-xs text-accent">
             Running...
           </span>
         )}
@@ -47,7 +47,7 @@ export default function Terminal({
       {/* Content */}
       <div className="h-[500px] overflow-y-auto p-5">
         {isRunning ? (
-          <div className="font-mono text-sm text-yellow-400">
+          <div className="font-mono text-sm text-accent">
             Executing JavaScript...
           </div>
         ) : error ? (
@@ -60,30 +60,30 @@ export default function Terminal({
                   <button
                     onClick={onExplainError}
                     disabled={isExplainingError}
-                    className="rounded-md border border-zinc-700 px-3 py-1.5 text-xs font-medium text-zinc-300 transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="mt-4 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted transition hover:border-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {isExplainingError ? "Thinking..." : "Explain Error"}
                   </button>
                 )}
 
                 {explanation && (
-                  <div className="mt-5 border-t border-zinc-800 pt-5">
-                    <div className="mb-2 text-sm font-semibold text-blue-400">
+                  <div className="mt-5 border-t border-border pt-5">
+                    <div className="mb-2 text-sm font-semibold text-accent">
                       💡 Mentor Explanation
                     </div>
 
-                    <p className="whitespace-pre-line text-sm leading-7 text-zinc-400">
+                    <p className="whitespace-pre-line text-sm leading-7 text-muted">
                       {explanation}
                     </p>
                   </div>
                 )}
               </div>
             ) : output ? (
-          <pre className="whitespace-pre-wrap font-mono text-sm leading-7 text-zinc-300">
+          <pre className="whitespace-pre-wrap font-mono text-sm leading-7 text-foreground">
             {output}
           </pre>
         ) : (
-          <div className="font-mono text-sm text-zinc-600">
+          <div className="font-mono text-sm text-muted/50">
             Run your code to see what it does.
           </div>
         )}

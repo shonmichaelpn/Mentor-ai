@@ -7,6 +7,8 @@ interface SidebarProps {
   currentChapter: number;
   completedChapters: number[];
   onSelectChapter: (index: number) => void;
+  mobileOpen?: boolean;
+  onClose?: () => void;
 }
 
 export default function Sidebar({
@@ -14,11 +16,14 @@ export default function Sidebar({
   currentChapter,
   completedChapters,
   onSelectChapter,
+  mobileOpen = true,
+  onClose,
 }: SidebarProps) {
   return (
-    <aside className="flex h-screen w-80 shrink-0 flex-col overflow-hidden border-r border-zinc-800 bg-zinc-950">
-      {/* Logo */}
-      <div className="border-b border-zinc-800 p-6">
+    <aside
+      className={`fixed inset-y-0 left-0 z-40 flex w-[85vw] max-w-sm shrink-0 flex-col overflow-hidden border-r border-zinc-800 bg-zinc-950 shadow-2xl shadow-black/40 transition-transform duration-200 lg:static lg:w-80 lg:max-w-none lg:translate-x-0 lg:shadow-none ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+    >
+      <div className="flex items-center justify-between border-b border-zinc-800 p-4 sm:p-6">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-black">
             M
@@ -34,16 +39,26 @@ export default function Sidebar({
             </p>
           </div>
         </div>
+
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-md border border-zinc-700 p-2 text-zinc-300 transition hover:bg-zinc-800 lg:hidden"
+            aria-label="Close chapters"
+          >
+            ✕
+          </button>
+        )}
       </div>
 
-      {/* Chapter list */}
-      <div className="min-h-0 flex-1 overflow-y-auto p-4">
+      <div className="min-h-0 flex-1 overflow-y-auto p-3 sm:p-4">
         <div className="mb-4 flex items-center justify-between px-2">
-          <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+          <span className="text-xs font-medium uppercase tracking-wider text-accent">
             Learning Path
           </span>
 
-          <span className="text-xs text-zinc-600">
+          <span className="text-xs text-accent">
             {completedChapters.length}/{chapters.length}
           </span>
         </div>
@@ -62,7 +77,10 @@ export default function Sidebar({
               <button
                 key={chapter.id}
                 disabled={!unlocked}
-                onClick={() => onSelectChapter(index)}
+                onClick={() => {
+                  onSelectChapter(index);
+                  onClose?.();
+                }}
                 className={`flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left transition ${
                   active
                     ? "bg-zinc-800 text-white"
@@ -71,7 +89,6 @@ export default function Sidebar({
                       : "cursor-not-allowed text-zinc-700"
                 }`}
               >
-                {/* Chapter number */}
                 <div
                   className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs ${
                     completed
@@ -86,12 +103,10 @@ export default function Sidebar({
                   {completed ? "✓" : index + 1}
                 </div>
 
-                {/* Chapter title */}
                 <span className="truncate text-sm">
                   {chapter.title}
                 </span>
 
-                {/* Lock */}
                 {!unlocked && (
                   <span className="ml-auto text-xs text-zinc-700">
                     🔒

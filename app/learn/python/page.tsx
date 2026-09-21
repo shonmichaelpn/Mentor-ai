@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import pythonChapters from "@/data/python/chapters.json";
 import Sidebar from "@/components/Sidebar";
 import LessonContent from "@/components/LessonContent";
@@ -13,8 +14,10 @@ import MCQTest from "@/components/MCQTest";
 import { validateChallenge } from "@/lib/challengeValidator";
 
 export default function Home() {
+  const router = useRouter();
   const [currentChapter, setCurrentChapter] = useState(0);
   const [completedChapters, setCompletedChapters] = useState<number[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [testPassed, setTestPassed] = useState(false);
   const [codingPassed, setCodingPassed] = useState(false);
 
@@ -143,6 +146,11 @@ export default function Home() {
         return;
       }
 
+      if (response.status === 401) {
+        router.push("/login");
+        throw new Error("Your session has expired. Please sign in again.");
+      }
+
       if (!response.ok || !data.success) {
         throw new Error(data.error || "Evaluation failed.");
       }
@@ -227,6 +235,11 @@ export default function Home() {
 
       const data = await response.json();
 
+      if (response.status === 401) {
+        router.push("/login");
+        throw new Error("Your session has expired. Please sign in again.");
+      }
+
       if (!response.ok || !data.success) {
         throw new Error(
           data.error || "Failed to explain the error."
@@ -263,51 +276,105 @@ export default function Home() {
     }
   };
 
+  const progressPercent =
+    chapterData.length > 0
+      ? (completedChapters.length / chapterData.length) * 100
+      : 0;
+
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-950 text-white">
-      {/* Sidebar */}
+    <div className="flex min-h-screen flex-col overflow-hidden bg-zinc-950 text-white lg:h-screen lg:flex-row">
+      {sidebarOpen && (
+        <button
+          type="button"
+          aria-label="Close chapter menu"
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-30 bg-black/60 lg:hidden"
+        />
+      )}
+
       <Sidebar
         chapters={chapterData}
         currentChapter={currentChapter}
         completedChapters={completedChapters}
-        onSelectChapter={handleChapterChange}
+        onSelectChapter={(index) => {
+          handleChapterChange(index);
+          setSidebarOpen(false);
+        }}
+        mobileOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
-      {/* Main Content */}
       <main 
         ref={mainRef}
         className="min-w-0 flex-1 overflow-y-auto"
       >
-        {/* Header */}
         <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur">
-          <div className="flex h-16 items-center justify-between px-8">
-            <div>
-              <p className="text-sm text-zinc-500">
-                Learning Path
-              </p>
+          <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:h-16 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setSidebarOpen(true)}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 text-zinc-200 transition hover:bg-zinc-800 lg:hidden"
+                aria-label="Open chapters"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
 
-              <p className="text-sm font-medium text-zinc-200">
-                Python Fundamentals
-              </p>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs text-zinc-500 lg:text-sm">
+                  Learning Path
+                </p>
+
+                <p className="truncate text-base font-medium text-zinc-200 lg:text-base">
+                  Python Fundamentals
+                </p>
+              </div>
             </div>
 
-            <div className="flex items-center gap-6">
-              <div className="text-right">
-                <p className="text-xs text-zinc-500">
-                  Progress
-                </p>
-
-                <p className="text-sm font-semibold text-zinc-200">
+            <div className="flex shrink-0 items-center gap-3 lg:flex-row lg:items-center lg:gap-5">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-accent">
                   {completedChapters.length} / {chapterData.length}
                 </p>
+
+                <div className="hidden h-1.5 w-20 overflow-hidden rounded-full bg-zinc-800 sm:block sm:w-24">
+                  <div
+                    className="h-full rounded-full bg-accent transition-all"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
               </div>
 
               <Link
                 href="/courses"
                 aria-label="Exit course and return to learning paths"
-                className="rounded-md border border-zinc-700 px-3 py-1.5 text-sm text-zinc-300 transition hover:bg-zinc-800"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-zinc-700 bg-zinc-900 text-zinc-300 transition hover:bg-zinc-800 lg:h-auto lg:w-auto lg:px-3 lg:py-1.5"
               >
-                Exit Course
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 6 3 12l6 6M3 12h13a5 5 0 0 0 0-10"
+                  />
+                </svg>
               </Link>
             </div>
           </div>
@@ -322,7 +389,7 @@ export default function Home() {
         {/* Test */}
         <section
           ref={testRef}
-          className="border-t border-zinc-800 px-8 py-10"
+          className="border-t border-zinc-800 px-4 py-6 sm:px-8 sm:py-10"
         >
           <div className="mx-auto max-w-4xl">
             <MCQTest
@@ -340,7 +407,7 @@ export default function Home() {
         {/* Coding Environment */}
         <section
           ref={codingRef}
-          className="border-t border-zinc-800 bg-zinc-950 px-8 py-10"
+          className="border-t border-zinc-800 bg-zinc-950 px-4 py-6 sm:px-8 sm:py-10"
         >
           <div className="mx-auto max-w-6xl">
 
@@ -395,7 +462,7 @@ export default function Home() {
               <>
                 {/* Challenge Header */}
                 <div className="mb-8">
-                  <div className="mb-2 text-sm font-medium text-emerald-400">
+                  <div className="mb-2 text-sm font-medium text-accent">
                     Coding Challenge
                   </div>
 
@@ -409,7 +476,7 @@ export default function Home() {
                 </div>
 
                 {/* Challenge Instructions */}
-                <div className="mb-8 rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
+                <div className="mb-8 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-6">
                   <h3 className="text-sm font-semibold text-zinc-200">
                     Your Task
                   </h3>
