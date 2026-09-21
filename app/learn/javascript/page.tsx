@@ -44,7 +44,7 @@ export default function Home() {
     };
 
     loadProgress();
-  }, []);
+  }, [router]);
 
   const [testPassed, setTestPassed] = useState(false);
   const [codingPassed, setCodingPassed] = useState(false);
@@ -254,6 +254,24 @@ export default function Home() {
     });
   };
 
+  const isChapterCompleted = completedChapters.includes(activeChapter.id) || codingPassed;
+
+  const handleRetakeChapter = () => {
+    setTestPassed(false);
+    setCodingPassed(false);
+    setEvaluation(null);
+    setEvaluationChapterId(null);
+    setTerminalOutput("");
+    setTerminalError(null);
+    setTerminalExplanation(null);
+    setUserCode(activeChapter.codingChallenge.starterCode);
+
+    testRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   const handleExplainError = async () => {
     if (!terminalError || isExplainingError) return;
 
@@ -450,8 +468,13 @@ export default function Home() {
           className="border-t border-zinc-800 bg-zinc-950 px-4 py-6 sm:px-8 sm:py-10"
         >
           <div className="mx-auto max-w-6xl">
+            {isChapterCompleted && (
+              <div className="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+                ✅ Current chapter completed. You can continue to the next chapter or retake the quiz anytime.
+              </div>
+            )}
 
-            {!testPassed && process.env.NODE_ENV !== "development" ? (
+            {!testPassed && !isChapterCompleted && process.env.NODE_ENV !== "development" ? (
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 text-center">
                 <div className="text-sm font-medium text-amber-400">
                   Coding Challenge Locked
@@ -466,7 +489,7 @@ export default function Home() {
                   Once you pass, the coding challenge and editor will become available.
                 </p>
               </div>
-            ) : codingPassed ? (
+            ) : isChapterCompleted ? (
               <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-10 text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 text-2xl text-emerald-400">
                   ✓
@@ -481,9 +504,24 @@ export default function Home() {
                 </h2>
 
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-zinc-400">
-                  Great work! You successfully completed the knowledge test
-                  and coding challenge for this chapter.
+                  This chapter is already complete. You can retake the quiz or restart the coding challenge any time.
                 </p>
+
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                  <button
+                    onClick={handleRetakeChapter}
+                    className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-3 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/15"
+                  >
+                    Retake Quiz
+                  </button>
+
+                  <button
+                    onClick={handleReset}
+                    className="rounded-lg border border-zinc-700 bg-zinc-900 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-800"
+                  >
+                    Restart Challenge
+                  </button>
+                </div>
 
                 {currentChapter < chapterData.length - 1 ? (
                   <button

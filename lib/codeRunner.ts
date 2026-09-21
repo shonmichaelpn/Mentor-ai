@@ -4,6 +4,51 @@ export interface CodeRunResult {
   timedOut: boolean;
 }
 
+export function runPython(
+  code: string,
+  timeout = 3000
+): Promise<CodeRunResult> {
+  return fetch("/api/run-python", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ code, timeout }),
+  })
+    .then(async (response) => {
+      const data = await response.json().catch(() => ({
+        output: [],
+        error: "Invalid Python execution response.",
+        timedOut: false,
+      }));
+
+      if (!response.ok) {
+        throw new Error(
+          typeof data?.error === "string" && data.error
+            ? data.error
+            : "Python execution failed."
+        );
+      }
+
+      return {
+        output: Array.isArray(data.output)
+          ? data.output
+          : data.output
+            ? [String(data.output)]
+            : [],
+        error:
+          typeof data.error === "string" && data.error ? data.error : null,
+        timedOut: Boolean(data.timedOut),
+      };
+    })
+    .catch((error) => ({
+      output: [],
+      error:
+        error instanceof Error ? error.message : "Python execution failed.",
+      timedOut: false,
+    }));
+}
+
 export function runJavaScript(
   code: string,
   timeout = 3000

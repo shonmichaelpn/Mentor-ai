@@ -35,39 +35,43 @@ export default function Home() {
         {/* Hero */}
         <section className="grid flex-1 items-center gap-16 pb-24 pt-40 lg:grid-cols-2">
           <div>
-            <h1 className="font-display text-5xl font-medium leading-[1.1] sm:text-6xl">
-              Code with someone looking over your shoulder.
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 font-mono text-[11px] text-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              Learn by building
+            </div>
+
+            <h1 className="max-w-xl font-display text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl">
+              Learn to code with a mentor in the loop.
             </h1>
 
-            <p className="mt-6 max-w-md text-lg leading-8 text-muted">
-              Learn programming through interactive lessons, knowledge tests, coding challenges, and AI-powered feedback that 
-              helps you understand where you went wrong.
+            <p className="mt-6 max-w-lg text-lg leading-8 text-muted">
+              Build real coding habits through structured lessons, quick practice, and feedback that helps you understand the why behind each fix.
             </p>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/register"
-                className="rounded-md bg-accent px-7 py-3.5 text-center text-sm font-medium text-accent-foreground transition hover:opacity-90"
+                className="rounded-lg bg-accent px-7 py-3.5 text-center text-sm font-medium text-accent-foreground transition hover:opacity-90"
               >
                 Create an account
               </Link>
               <Link
                 href="/login"
-                className="rounded-md border border-border px-7 py-3.5 text-center text-sm font-medium text-foreground transition hover:bg-surface"
+                className="rounded-lg border border-border px-7 py-3.5 text-center text-sm font-medium text-foreground transition hover:bg-surface"
               >
-                I already have an account
+                Sign in
               </Link>
             </div>
           </div>
 
           {/* Editor mock */}
-          <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-2xl shadow-black/40">
+          <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-2xl shadow-black/30">
             <div className="flex items-center gap-2 border-b border-border px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-border" />
               <span className="h-2.5 w-2.5 rounded-full bg-border" />
               <span className="h-2.5 w-2.5 rounded-full bg-border" />
               <span className="ml-2 font-mono text-xs text-muted">
-                sum.py
+                challenge.py
               </span>
             </div>
 
@@ -77,47 +81,40 @@ export default function Home() {
                   1
                 </span>
                 <span>
-                  <span className="text-accent">def</span> total(items):
+                  <span className="text-accent">def</span> sum_numbers(nums):
                 </span>
               </div>
               <div className="flex gap-4">
                 <span className="w-4 select-none text-right text-muted/50">
                   2
                 </span>
-                <span className="pl-4">result = 0</span>
+                <span className="pl-4">total = 0</span>
               </div>
               <div className="flex gap-4">
                 <span className="w-4 select-none text-right text-muted/50">
                   3
                 </span>
                 <span className="pl-4">
-                  <span className="text-accent">for</span> i{" "}
-                  <span className="text-accent">in</span>{" "}
-                  <span className="text-code-ok">range</span>(len(items)):
+                  <span className="text-accent">for</span> num <span className="text-accent">in</span> nums:
                 </span>
               </div>
-              <div className="flex gap-4 rounded bg-code-err/10">
+              <div className="flex gap-4 rounded-md bg-surface-2">
                 <span className="w-4 select-none text-right text-muted/50">
                   4
                 </span>
-                <span className="pl-8">result += items[i + i]</span>
+                <span className="pl-8">total += num</span>
               </div>
               <div className="flex gap-4">
                 <span className="w-4 select-none text-right text-muted/50">
                   5
                 </span>
                 <span className="pl-4">
-                  <span className="text-accent">return</span> result
+                  <span className="text-accent">return</span> total
                 </span>
               </div>
 
-              <div className="mt-4 rounded-r border-l-2 border-accent bg-surface-2 p-3 text-sm leading-6 text-muted">
-                <span className="font-medium text-accent">Mentor</span> —
-                line 4 adds{" "}
-                <code className="text-foreground">i</code> to itself instead
-                of stepping forward. Try{" "}
-                <code className="text-foreground">items[i]</code>. This kind
-                of off-by-one mistake is the most common bug in loops.
+              <div className="mt-5 rounded-r border-l-2 border-accent bg-surface-2 p-3 text-sm leading-6 text-muted">
+                <span className="font-medium text-accent">Mentor</span> — the loop is working, but the current answer is missing the final check for empty input.
               </div>
             </div>
           </div>
@@ -182,8 +179,8 @@ export default function Home() {
 
         <footer className="border-t border-border py-8 text-xs text-muted">
           <div className="flex items-center justify-between">
-            <span className="font-mono">Mentor</span>
-            <span>© {new Date().getFullYear()}</span>
+            <span className="font-mono">Learn with Mentor</span>
+            <span>© MentorAI</span>
           </div>
         </footer>
       </div>

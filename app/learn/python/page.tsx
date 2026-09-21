@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import pythonChapters from "@/data/python/chapters.json";
@@ -11,6 +11,7 @@ import Terminal from "@/components/Terminal";
 import EvaluationPanel, { type Evaluation } from "@/components/EvaluationPanel";
 import { Chapter } from "@/types/chapter";
 import MCQTest from "@/components/MCQTest";
+import { runPython } from "@/lib/codeRunner";
 import { validateChallenge } from "@/lib/challengeValidator";
 
 export default function Home() {
@@ -22,6 +23,31 @@ export default function Home() {
   const [codingPassed, setCodingPassed] = useState(false);
 
   const chapterData = pythonChapters as Chapter[];
+
+  useEffect(() => {
+    const loadProgress = async () => {
+      try {
+        const response = await fetch("/api/progress?courseId=python");
+
+        if (response.status === 401) {
+          router.push("/login");
+          return;
+        }
+
+        if (!response.ok) {
+          console.error("Failed to load progress");
+          return;
+        }
+
+        const data = await response.json();
+        setCompletedChapters(data.completedChapters || []);
+      } catch (error) {
+        console.error("Failed to load progress:", error);
+      }
+    };
+
+    loadProgress();
+  }, [router]);
 
   const [userCode, setUserCode] = useState(
     chapterData[0].codingChallenge.starterCode
@@ -84,9 +110,25 @@ export default function Home() {
     setTerminalExplanation(null);
 
     try {
-      setTerminalOutput(
-        "Python execution is not available in the browser yet. Your solution can still be validated and evaluated when you submit it."
-      );
+      const result = await runPython(userCode);
+
+      if (result.timedOut) {
+        setTerminalError("Execution timed out.");
+        return;
+      }
+
+      if (result.error) {
+        setTerminalOutput(result.output.join("\n"));
+        setTerminalError(result.error);
+        return;
+      }
+
+      if (result.output.length === 0) {
+        setTerminalOutput("Program finished with no output.");
+        return;
+      }
+
+      setTerminalOutput(result.output.join("\n"));
     } finally {
       setIsRunning(false);
     }
@@ -199,6 +241,24 @@ export default function Home() {
     } finally {
       setIsEvaluating(false);
     }
+  };
+
+  const isChapterCompleted = completedChapters.includes(activeChapter.id) || codingPassed;
+
+  const handleRetakeChapter = () => {
+    setTestPassed(false);
+    setCodingPassed(false);
+    setEvaluation(null);
+    setEvaluationChapterId(null);
+    setTerminalOutput("");
+    setTerminalError(null);
+    setTerminalExplanation(null);
+    setUserCode(activeChapter.codingChallenge.starterCode);
+
+    testRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   const handleContinueToNextChapter = () => {
@@ -410,8 +470,13 @@ export default function Home() {
           className="border-t border-zinc-800 bg-zinc-950 px-4 py-6 sm:px-8 sm:py-10"
         >
           <div className="mx-auto max-w-6xl">
+            {isChapterCompleted && (
+              <div className="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
+                ✅ Current chapter completed. You can continue to the next chapter or retake the quiz anytime.
+              </div>
+            )}
 
-            {!testPassed && process.env.NODE_ENV !== "development" ? (
+            {!testPassed && !isChapterCompleted && process.env.NODE_ENV !== "development" ? (
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-8 text-center">
                 <div className="text-sm font-medium text-amber-400">
                   Coding Challenge Locked
@@ -426,7 +491,7 @@ export default function Home() {
                   Once you pass, the coding challenge and editor will become available.
                 </p>
               </div>
-            ) : codingPassed ? (
+            ) : isChapterCompleted ? (
               <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-10 text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 text-2xl text-emerald-400">
                   ✓
@@ -441,9 +506,24 @@ export default function Home() {
                 </h2>
 
                 <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-zinc-400">
-                  Great work! You successfully completed the knowledge test
-                  and coding challenge for this chapter.
+                  This chapter is already complete. You can retake the quiz or restart the coding challenge any time.
                 </p>
+
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                  <button
+                    onClick={handleRetakeChapter}
+                    className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 px-5 py-3 text-sm font-semibold text-emerald-300 transition hover:bg-emerald-500/15"
+                  >
+                    Retake Quiz
+                  </button>
+
+                  <button
+                    onClick={handleReset}
+                    className="rounded-lg border border-zinc-700 bg-zinc-900 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:bg-zinc-800"
+                  >
+                    Restart Challenge
+                  </button>
+                </div>
 
                 {currentChapter < chapterData.length - 1 ? (
                   <button
@@ -506,11 +586,6 @@ export default function Home() {
 
                 {/* Editor + Terminal */}
 
-                <div className="mb-4 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-300">
-                  Python lessons and validation are supported. Browser-based Python
-                  execution will be added separately.
-                </div>
-
                 <div className="grid items-start gap-6 lg:grid-cols-[1fr_380px]">
                   <div className="overflow-hidden rounded-xl border border-zinc-800">
                     <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-4 py-3">
@@ -547,6 +622,7 @@ export default function Home() {
                     <CodeEditor
                       value={userCode}
                       onChange={setUserCode}
+                      language="python"
                     />
                   </div>
 
@@ -558,6 +634,7 @@ export default function Home() {
                     isRunning={isRunning}
                     isExplainingError={isExplainingError}
                     onExplainError={handleExplainError}
+                    language="python"
                   />
                 </div>
                 

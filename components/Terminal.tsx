@@ -5,9 +5,8 @@ interface TerminalProps {
   isRunning?: boolean;
   isExplainingError?: boolean;
   onExplainError?: () => void;
+  language?: "javascript" | "python";
 }
-
-
 
 export default function Terminal({
   output,
@@ -16,6 +15,7 @@ export default function Terminal({
   isRunning,
   isExplainingError,
   onExplainError,
+  language = "javascript",
 }: TerminalProps) {
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-background">
@@ -48,7 +48,7 @@ export default function Terminal({
       <div className="h-[500px] overflow-y-auto p-5">
         {isRunning ? (
           <div className="font-mono text-sm text-accent">
-            Executing JavaScript...
+            {language === "python" ? "Executing Python..." : "Executing JavaScript..."}
           </div>
         ) : error ? (
               <div>

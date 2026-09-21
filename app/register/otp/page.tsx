@@ -49,54 +49,109 @@ export default function VerifyOtpPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-zinc-950 px-6 text-white">
-      <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <Link href="/" className="text-lg font-semibold tracking-tight">
-            Mentor AI
-          </Link>
-          <h1 className="mt-8 text-3xl font-semibold tracking-tight">
-            Verify your email
-          </h1>
-          <p className="mt-3 text-sm text-zinc-500">
-            Enter the six-digit code we sent to finish creating your account.
-          </p>
+    <main className="grid min-h-screen bg-background text-foreground lg:grid-cols-2">
+      <div className="hidden flex-col justify-between border-r border-border bg-surface p-12 lg:flex">
+        <Link href="/" className="font-display text-lg font-medium tracking-tight">
+          Mentor AI
+        </Link>
+
+        <div>
+          <div className="mb-6 inline-flex items-center gap-2 font-mono text-xs text-muted">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            Almost there
+          </div>
+
+          <h2 className="max-w-sm font-display text-2xl font-medium leading-snug">
+            Confirm your account and start learning.
+          </h2>
+
+          <div className="mt-8 rounded-lg border border-border bg-background p-5">
+            <div className="mb-4 flex items-center justify-between text-xs text-muted">
+              <span>Secure verification</span>
+              <span className="font-mono text-accent">6-digit code</span>
+            </div>
+
+            <div className="flex items-center justify-between gap-2">
+              {[0, 1, 2, 3, 4, 5].map((digit) => (
+                <div
+                  key={digit}
+                  className="flex h-12 w-10 items-center justify-center rounded-md border border-border bg-surface text-lg font-medium text-foreground"
+                >
+                  {digit === 0 ? "•" : ""}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-7"
-        >
-          {success && (
-            <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-sm text-emerald-400">
-              {success}
-            </div>
-          )}
+        <p className="text-sm text-muted" />
+      </div>
 
-          <div className="space-y-5">
+      <div className="relative flex items-center justify-center px-6 py-16">
+        <Link
+          href="/"
+          className="absolute right-6 top-6 text-sm text-muted transition hover:text-foreground"
+        >
+          Exit to home
+        </Link>
+
+        <div className="w-full max-w-sm">
+          <Link
+            href="/"
+            className="mb-10 block text-center font-display text-lg font-medium tracking-tight lg:hidden"
+          >
+            Mentor AI
+          </Link>
+
+          <div className="mb-8">
+            <h1 className="font-display text-3xl font-medium tracking-tight">
+              Verify your email
+            </h1>
+            <p className="mt-2 text-sm text-muted">
+              Enter the code we sent to {email || "your inbox"}.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {success && (
+              <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-sm text-emerald-400">
+                {success}
+              </div>
+            )}
+
             <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-medium text-zinc-300"
-              >
+              <label htmlFor="email" className="mb-2 block text-sm font-medium text-muted">
                 Email
               </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-                autoComplete="email"
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-zinc-500"
-              />
+              <div className="relative">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 6.5 12 13l9-6.5M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"
+                  />
+                </svg>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                  className="w-full rounded-lg border border-border bg-surface py-3 pl-11 pr-4 text-sm text-foreground outline-none transition placeholder:text-muted/50 focus:border-accent focus:ring-4 focus:ring-accent/10"
+                />
+              </div>
             </div>
 
             <div>
-              <label
-                htmlFor="code"
-                className="mb-2 block text-sm font-medium text-zinc-300"
-              >
+              <label htmlFor="code" className="mb-2 block text-sm font-medium text-muted">
                 Verification code
               </label>
               <input
@@ -107,34 +162,52 @@ export default function VerifyOtpPage() {
                 maxLength={6}
                 value={code}
                 onChange={(event) => setCode(event.target.value.replace(/\D/g, ""))}
+                placeholder="123456"
                 required
                 autoComplete="one-time-code"
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 text-center text-lg tracking-[0.4em] text-white outline-none transition placeholder:text-zinc-600 focus:border-zinc-500"
+                className="w-full rounded-lg border border-border bg-surface py-3 px-4 text-center text-lg tracking-[0.35em] text-foreground outline-none transition placeholder:text-muted/50 focus:border-accent focus:ring-4 focus:ring-accent/10"
               />
             </div>
-          </div>
 
-          {error && !success && (
-            <div className="mt-5 rounded-lg border border-red-500/20 bg-red-500/5 px-4 py-3 text-sm text-red-400">
-              {error}
-            </div>
-          )}
+            {error && !success && (
+              <div className="rounded-lg border border-red-500/20 bg-red-500/5 px-4 py-3 text-sm text-red-400">
+                {error}
+              </div>
+            )}
 
-          <button
-            type="submit"
-            disabled={isLoading || Boolean(success)}
-            className="mt-6 w-full rounded-lg bg-white px-5 py-3 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {isLoading ? "Verifying..." : "Verify email"}
-          </button>
+            <button
+              type="submit"
+              disabled={isLoading || Boolean(success)}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isLoading && (
+                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                  />
+                  <path
+                    className="opacity-90"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4Z"
+                  />
+                </svg>
+              )}
+              {isLoading ? "Verifying..." : "Verify email"}
+            </button>
 
-          <p className="mt-6 text-center text-sm text-zinc-500">
-            Need a new code?{" "}
-            <Link href="/register" className="font-medium text-zinc-200 hover:text-white">
-              Start again
-            </Link>
-          </p>
-        </form>
+            <p className="text-center text-sm text-muted">
+              Need a new code?{" "}
+              <Link href="/register" className="font-medium text-foreground hover:text-accent">
+                Start again
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </main>
   );
