@@ -59,6 +59,7 @@ Copy `.env.example` to `.env.local` and fill in the values:
 GEMINI_API_KEY=your_gemini_api_key
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_long_random_secret
+APP_URL=http://localhost:3000
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_USER=your_smtp_username
@@ -67,6 +68,11 @@ SMTP_FROM=Mentor AI <your-email@example.com>
 ```
 
 `SMTP_FROM` is optional and defaults to `SMTP_USER`.
+`APP_URL` is used to create password reset links. Set it to your deployed site's
+canonical HTTPS URL in production. Vercel deployments can use the platform's
+`VERCEL_URL` when `APP_URL` is not set.
+
+If you are using a local MongoDB instance, keep the connection string in `.env.local` and make sure the database is running before starting the app.
 
 ### Run locally
 
@@ -98,7 +104,7 @@ npm test
 npm run build
 ```
 
-The test suite covers challenge validation, AI evaluation API protection, login behavior, registration validation, and OTP verification.
+The test suite covers challenge validation, AI evaluation API protection, login behavior, registration validation, OTP verification, and password reset.
 
 ## Deploying to Vercel
 
@@ -106,7 +112,7 @@ The test suite covers challenge validation, AI evaluation API protection, login 
 2. Open [Vercel](https://vercel.com) and select **Add New Project**.
 3. Import the GitHub repository.
 4. Keep the detected Next.js framework and default build settings.
-5. Add every variable from `.env.example` under **Settings > Environment Variables**.
+5. Add the same variables from your local `.env.local` under **Settings > Environment Variables** in Vercel.
 6. Deploy the project.
 7. In MongoDB Atlas, allow the deployment to connect to the database and verify that the database user has the required permissions.
 8. Test registration, email verification, login, course progress, and AI feedback on the deployed URL.

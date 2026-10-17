@@ -51,7 +51,7 @@ describe("POST /api/auth/login", () => {
 
     expect(response.status).toBe(401);
     expect(await response.json()).toEqual({
-      message: "Invalid email or password",
+      message: "No account found with that email. Please check it or create an account.",
     });
     expect(mocks.comparePassword).not.toHaveBeenCalled();
     expect(mocks.signToken).not.toHaveBeenCalled();
@@ -79,7 +79,7 @@ describe("POST /api/auth/login", () => {
 
     expect(response.status).toBe(401);
     expect(await response.json()).toEqual({
-      message: "Invalid email or password",
+      message: "Incorrect password. Try again or reset your password.",
     });
     expect(mocks.comparePassword).toHaveBeenCalledWith(
       "wrong-password",

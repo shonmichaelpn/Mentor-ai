@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "No account found with that email. Please check it or create an account." },
         { status: 401 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
 
     if (!passwordMatch) {
       return NextResponse.json(
-        { message: "Invalid email or password" },
+        { message: "Incorrect password. Try again or reset your password." },
         { status: 401 }
       );
     }
