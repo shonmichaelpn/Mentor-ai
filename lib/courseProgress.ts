@@ -9,7 +9,6 @@ export function getLatestUnlockedChapterIndex<T extends { id: number }>(
   let lastUnlockedIndex = 0;
 
   for (let index = 0; index < chapters.length; index += 1) {
-    const chapter = chapters[index];
     const previousChapter = chapters[index - 1];
 
     if (

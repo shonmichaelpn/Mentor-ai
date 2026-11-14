@@ -60,7 +60,7 @@ export default function Home() {
     };
 
     loadProgress();
-  }, [router]);
+  }, [chapterData, router]);
 
   const [userCode, setUserCode] = useState(
     chapterData[0].codingChallenge.starterCode

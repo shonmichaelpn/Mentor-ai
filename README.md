@@ -1,5 +1,8 @@
 # Mentor AI
 
+![CI](https://github.com/shonmichaelpn/Mentor-ai/actions/workflows/ci.yml/badge.svg)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-blue)](SECURITY.md)
+
 Mentor AI is an interactive programming learning platform built with Next.js. It combines structured lessons, knowledge checks, coding challenges, deterministic validation, and AI-generated mentoring feedback.
 
 ## Features

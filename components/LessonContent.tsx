@@ -175,6 +175,16 @@ export default function LessonContent({
           </article>
         ))}
       </div>
+
+      <div className="mt-8 flex justify-center sm:mt-10">
+        <button
+          type="button"
+          onClick={onSkipToTest}
+          className="rounded-lg border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition hover:bg-accent/15"
+        >
+          Skip to test
+        </button>
+      </div>
     </section>
   );
 }

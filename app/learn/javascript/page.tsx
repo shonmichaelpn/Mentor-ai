@@ -58,7 +58,7 @@ export default function Home() {
     };
 
     loadProgress();
-  }, [router]);
+  }, [chapterData, router]);
 
   const [testPassed, setTestPassed] = useState(false);
   const [codingPassed, setCodingPassed] = useState(false);

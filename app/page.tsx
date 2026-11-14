@@ -127,7 +127,7 @@ export default function Home() {
           </h2>
           <p className="mt-3 max-w-md text-muted">
             Every topic moves through the same three steps, so you always
-            know what's next.
+            know what&apos;s next.
           </p>
 
           <div className="mt-14 divide-y divide-border">
